@@ -4,16 +4,12 @@ LeagueJS
 [![Join the chat at https://gitter.im/League-JS/Lobby](https://badges.gitter.im/League-JS/Lobby.svg)](https://gitter.im/League-JS/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A Javascript Wrapper for the League of Legends API.
-
-## How To Use
-// TODO: rework this doc-part
-Use npm to install it from the npm registry by running `npm install leagueapi`
-
-```
-Run `npm install` followed by `node server.js`
-```
+Originated from (ClaudioWilson/LeagueJS)[https://github.com/claudiowilson/LeagueJS] but now published under leaguejs and using RIOT API V3
 
 ### Quickstart
+```
+npm install leaguejs -save
+```
 
 ```
 // setting default platformId to be used if you don't specify it on the endpoint method

@@ -1,6 +1,6 @@
 {
   "name": "leaguejs",
-  "version": "1.0.0-beta.7",
+  "version": "1.0.0",
   "description": "Wrapper for the League of Legends API",
   "keywords": [
     "leagueoflegends",
@@ -11,8 +11,8 @@
     "riot-games-api-v3"
   ],
   "author": {
-    "name": "Claudio Wilson",
-    "email": "claudiowilson@utexas.edu"
+    "name": "Jonas Krispin",
+    "email": "github@krispin.it"
   },
   "scripts": {
     "test": "gulp test"
@@ -20,7 +20,7 @@
   "main": "lib/LeagueJS.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/claudiowilson/LeagueJS"
+    "url": "https://github.com/Colorfulstan/LeagueJS"
   },
   "dependencies": {
     "bluebird": "~3.5.0",
@@ -43,16 +43,10 @@
     "plato": "~1.7.0",
     "sinon": "latest"
   },
-  "maintainers": [
-    "Marcel Behrmann <mail@marcelbehrmann.de>"
-  ],
+  "maintainers": [],
   "readmeFilename": "README.md",
   "bugs": {
-    "url": "https://github.com/claudiowilson/LeagueJS/issues"
+    "url": "https://github.com/Colorfulstan/LeagueJS/issues"
   },
-  "homepage": "https://github.com/claudiowilson/LeagueJS",
-  "_id": "leagueapi@0.4.3",
-  "_shasum": "7f318bf26f72e5c478ba48ed8b9e99a11eafdd09",
-  "_from": "leagueapi@0.4.3",
-  "_resolved": "https://registry.npmjs.org/leagueapi/-/leagueapi-0.4.3.tgz"
+  "homepage": "https://github.com/Colorfulstan/LeagueJS"
 }
