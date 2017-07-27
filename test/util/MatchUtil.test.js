@@ -32,6 +32,11 @@ describe('MatchUtil Testsuite', function () {
 				MatchUtil.getVersionForGameVersion('5.1.8.123452', ['5.1.5', '5.1.3', '5.1.2'].reverse())
 					.should.equal(expected);
 			});
+			it('does get the latest version if given gameVersion cant be matched', function () {
+				const expected = ('5.1.5');
+				MatchUtil.getVersionForGameVersion('5.3.8.123452', ['5.1.5', '5.1.3', '5.1.2'])
+					.should.equal(expected);
+			});
 		});
 	});
 });
