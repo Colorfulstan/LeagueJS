@@ -39,4 +39,12 @@ describe('MatchUtil Testsuite', function () {
 			});
 		});
 	});
+	describe('getPatchFromGameVersion()', function () {
+		it('returns major.minor version for gameVersion values (major.minor.patch.build)', function () {
+			const expected = ('5.1');
+			MatchUtil.getPatchFromGameVersion('5.1.8.123452').should.equal(expected);
+			MatchUtil.getPatchFromGameVersion('5.1.8').should.equal(expected);
+			MatchUtil.getPatchFromGameVersion('5.1').should.equal(expected);
+		});
+	});
 });
