@@ -26,7 +26,22 @@ describe('MatchEndpoint Testsuite', function () {
 		endpoint.config.limits.retryEndpoints.should.include(endpoint.name);
 	});
 	describe('gettingById', function () {
-		it('can request a specific match', function () {
+		it('Using "forAccountId" it contains the player information for the provided accountID (and ONLY that)', function () {
+			return endpoint.gettingById(mock_summoner.gameId, mock_summoner.platformId, {forAccountId: mock_summoner.accountId})
+				.then(matchDto => {
+					let numParticipantIdentityPlayers = 0;
+					let participantPlayer;
+					matchDto.participantIdentities.forEach(identity => {
+						if (identity.player) {
+							numParticipantIdentityPlayers++;
+							participantPlayer = identity.player;
+						}
+					});
+					expect(numParticipantIdentityPlayers).to.equal(1);
+					expect(participantPlayer.accountId).to.equal(mock_summoner.accountId);
+				});
+		});
+		it('can request a specific match for an accountId', function () {
 			return endpoint.gettingById(mock_summoner.gameId, mock_summoner.platformId)
 				.should.eventually.have.property('gameId');
 		});

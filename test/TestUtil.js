@@ -22,8 +22,8 @@ class TestUtil {
 		let summoners = {
 			Colorfulstan: {
 				name: 'Colorfulstan',
-				summonerId: '19115840',
-				accountId: '21777671',
+				summonerId: 19115840,
+				accountId: 21777671,
 				platformId: 'euw1',
 				gameId: 3164960478
 			}
