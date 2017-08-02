@@ -9,15 +9,15 @@ Originated from [ClaudioWilson/LeagueJS](https://github.com/claudiowilson/League
 Note: Tournament API is not included at this time
 
 ## Table of Content
-- [Quickstart](#Quickstart)
-- [Library Structure](#Library-Structure)
-	- [Naming conventions](#Naming-conventions)
-	- [Endpoints](#Endpoints)
-	- [Utility methods](#Utility-methods)
-- [Environment Variables](#Environment-Variables)
-- [Request retries](#Request-retries)
-- [Caching](#Caching)
-- [Developer](#Developer)
+- [Quickstart](#quickstart)
+- [Library Structure](#library-structure)
+	- [Naming conventions](#naming-conventions)
+	- [Endpoints](#endpoints)
+	- [Utility methods](#utility-methods)
+- [Environment Variables](#environment-Variables)
+- [Request retries](#request-retries)
+- [Caching](#caching)
+- [Developer](#developer)
 
 ### Quickstart
 ```
