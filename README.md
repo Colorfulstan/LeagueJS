@@ -21,7 +21,7 @@ Note: Tournament API is not included at this time
 
 ### Quickstart
 ```
-npm install leaguejs -save
+npm install leaguejs --save
 ```
 
 ```
@@ -59,7 +59,7 @@ api.Summoner
 #### Naming conventions
 Endpoints and their methods are named in alignment to the [API documentation](https://developer.riotgames.com/api-methods/).
 
-Methods returning a promise are named in past progressive (gettingXY) while synchronous methods are called in present tense (getXY)
+Methods returning a promise are named in present progressive (gettingXY) while synchronous methods are called in present tense (getXY)
 
 #### Endpoints
 Each Endpoint is located in it's own class, accessible by its name on the leagueJS object.
