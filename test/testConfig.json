@@ -1,8 +1,0 @@
-{
-  "API_KEY": "RGAPI-0d4c0e5d-ba59-41fd-83a9-e66a92487057",
-  "limits": {
-	"allowBursts": false,
-	"per10": 10,
-	"per600": 500
-  }
-}
