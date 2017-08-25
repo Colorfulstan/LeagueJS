@@ -26,6 +26,10 @@ describe('League of Legends api wrapper test suite', function() {
 		LeagueJs.util.should.have.property('EndpointUtil');
 	});
 
+	it('provides GameConstants object', function () {
+		LeagueJs.GAME_CONSTANTS.should.have.property('seasons');
+	});
+
 	describe('Endpoints', function () {
 		it('are set as properties', function () {
 			let api = new LeagueJs('test');
