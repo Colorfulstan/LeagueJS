@@ -27,7 +27,7 @@ describe('MatchEndpoint Testsuite', function () {
 	});
 	describe('gettingById', function () {
 		it('Using "forAccountId" it contains the player information for the provided accountID (and ONLY that)', function () {
-			return endpoint.gettingById(mock_summoner.gameId, mock_summoner.platformId, {forAccountId: mock_summoner.accountId})
+			return endpoint.gettingById(mock_summoner.gameId, mock_summoner.platformId, {forAccountId: mock_summoner.accountId, forPlatformId: mock_summoner.platformId})
 				.then(matchDto => {
 					let numParticipantIdentityPlayers = 0;
 					let participantPlayer;
@@ -52,6 +52,53 @@ describe('MatchEndpoint Testsuite', function () {
 				.should.eventually.have.property('matches')
 				.an('Array')
 				.with.length.of.at.least(100);
+		});
+		it('can request the matchlist for multiple summoners in parallel', function () {
+			this.timeout(0);
+
+			const accountIds = [
+				24885403,
+				42347345,
+				21977757,
+				33121340,
+				31385891,
+				28631306,
+				22242237
+			];
+			const platformId = 'euw1';
+
+			function gettingFirstMatchFromMatchList(accountId, platformId){
+				// console.log(accountId, platformId);
+
+				return endpoint.gettingListByAccount(accountId, platformId)
+					.then(matchListDto => {
+						// console.log(accountId, platformId);
+						// console.log(matchListDto.matches[0]);
+						return endpoint.gettingById(matchListDto.matches[0].gameId, matchListDto.matches[0].platformId);
+					});
+			}
+
+			return Promise.all([
+				gettingFirstMatchFromMatchList(accountIds[0], platformId)
+				,
+				gettingFirstMatchFromMatchList(accountIds[1], platformId)
+				,
+				gettingFirstMatchFromMatchList(accountIds[2], platformId)
+				,
+				gettingFirstMatchFromMatchList(accountIds[3], platformId)
+				,
+				gettingFirstMatchFromMatchList(accountIds[4], platformId)
+				,
+				gettingFirstMatchFromMatchList(accountIds[5], platformId)
+				,
+				gettingFirstMatchFromMatchList(accountIds[6], platformId)
+			]).then(matchDtos => {
+				matchDtos.forEach((matchDto, index)=>{
+					// console.log(accountIds[index], matchDto.participantIdentities.map(identity => identity.player));
+					let playerFound = matchDto.participantIdentities.find(identity => (identity.player.currentAccountId === accountIds[index] || identity.player.accountId === accountIds[index]));
+					expect(playerFound).to.exist;
+				});
+			});
 		});
 	});
 	describe('gettingRecentListByAccount', function () {
