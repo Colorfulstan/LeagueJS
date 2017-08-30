@@ -3,7 +3,7 @@ describe('ErrorUtil Testsuite', function () {
 
 	const ErrorUtil = require('../../lib/util/ErrorUtil');
 	const ParameterError = require('../../lib/errors/ParameterError');
-	const LeagueJSRateLimiter = require('../../lib/ratelimiter/LeagueJSRateLimiter');
+	const RiotRateLimiter = require('riot-ratelimiter');
 
 	const chai = require("chai");
 	// const chaiAsPromised = require("chai-as-promised");
@@ -68,7 +68,7 @@ describe('ErrorUtil Testsuite', function () {
 			expect(()=>{ErrorUtil.throwIfNotRateLimiter({}, 'paramName');}, 'did not throw with object').to.throw(TypeError);
 		});
 		it('does not throw with RateLimiter instance', function () {
-			expect(()=>{ErrorUtil.throwIfNotRateLimiter(new LeagueJSRateLimiter(1,1,true), 'paramName');}).not.to.throw(TypeError);
+			expect(()=>{ErrorUtil.throwIfNotRateLimiter(new RiotRateLimiter(), 'paramName');}).not.to.throw(TypeError);
 		});
 	});
 });

@@ -1,6 +1,7 @@
 const deepmerge = require('deepmerge');
 const Config = require('../lib/Config');
-const LeagueJSRateLimiter = require('../lib/ratelimiter/LeagueJSRateLimiter');
+const RiotRateLimiter = require('riot-ratelimiter');
+const STRATEGY = require('riot-ratelimiter/dist/RateLimiter').STRATEGY;
 
 class TestUtil {
 	static getTestConfig() {
@@ -15,7 +16,7 @@ class TestUtil {
 	}
 
 	static createRateLimiter(per10, per600, allowBursts){
-		return new LeagueJSRateLimiter(per10, per600, allowBursts);
+		return new RiotRateLimiter({strategy: allowBursts? STRATEGY.BURST : STRATEGY.SPREAD, debug: true});
 	}
 
 	static get mocks() {

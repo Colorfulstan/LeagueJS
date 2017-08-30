@@ -16,7 +16,7 @@ describe('ChampionEndpoint Testsuite', function () {
 
 	let endpoint;
 	beforeEach(function () {
-		endpoint = new LolStatusEndpoint(mergedConfig);
+		endpoint = new LolStatusEndpoint(mergedConfig, TestUtil.createRateLimiter());
 	});
 
 	it('has its name added to default retryEndpoints', function () {

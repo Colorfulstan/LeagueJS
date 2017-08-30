@@ -100,6 +100,25 @@ We recommend you read the API key from your environment variables too and pass t
 const leagueApi = new League(process.env.LEAGUE_API_KEY)
 ```
 
+### Rate Limiting
+Rate limiting will be handled for you by default using [RiotRateLimiter-node](https://github.com/Colorfulstan/RiotRateLimiter-node).
+Code created with LeagueJS < 1.5.0 should not be affected other then that the default limiting strategy now is SPREAD
+(see [RiotRateLimiter-node docs](https://github.com/Colorfulstan/RiotRateLimiter-node#choosing-the-right-strategy) for details.), which means your code might execute slower then before.
+
+You can change the limiting strategy in two ways:
+```
+const LeagueJs = require('../lib/LeagueJS.js');
+
+// passing in allowBursts: true on instantiation
+
+const api = new LeagueJs(process.env.LEAGUE_API_KEY, {
+	limits: {allowBurst: true}
+});
+
+// updating the limiter
+api.updateRateLimiter({allowBursts: true})
+```
+
 ### Request retries
 By default, we will retry requests to the API that respond with 500, 503
 and 429 that are not caused by the API-edge servers (so missing additional information about retry and limits).
@@ -116,9 +135,7 @@ You can configure this behaviour by passing the relevant options into the League
 const LeagueJs = require('../lib/LeagueJS.js');
 const api = new LeagueJs(process.env.LEAGUE_API_KEY, {
 	limits: {
-		'per10': 10,
-		'per600': 500,
-		'allowBursts': true,
+		'allowBursts': false,
 
 		// maximum amount of retries done when encountering 429 without retry-after header or 503 / 500
 		'numMaxRetries': 3,

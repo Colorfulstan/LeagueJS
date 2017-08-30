@@ -1,4 +1,4 @@
-describe('ChampionEndpoint Testsuite', function () {
+describe('StaticDataEndpoint Testsuite', function () { // due to very low method limits not feasible to run all tests. Run single tests on demand!
 	'use strict';
 
 	const StaticDataEndpoint = require('../../lib/endpoints/StaticDataEndpoint');
@@ -21,15 +21,17 @@ describe('ChampionEndpoint Testsuite', function () {
 	const mock_summonerSpell = TestUtil.mocks.summonerSpells.Flash;
 
 	let endpoint;
-	beforeEach(function () {
+	before(function () {
 		mergedConfig.PLATFORM_ID = mock_summoner.platformId;
-		endpoint = new StaticDataEndpoint(mergedConfig);
+		mergedConfig.caching.isEnabled = true;
+		const {per10, per600, allowBursts} = mergedConfig.limits;
+		endpoint = new StaticDataEndpoint(mergedConfig, TestUtil.createRateLimiter(per10, per600, allowBursts));
 	});
 
 	it('has its name added to default retryEndpoints', function () {
 		endpoint.config.limits.retryEndpoints.should.include(endpoint.name);
 	});
-	describe('gettingChampions', function () {
+	describe.skip('gettingChampions', function () {
 		this.timeout(5000); // can take a long time to receive response (2 sec+)
 
 		it('gets the data for all champions', function () {
@@ -54,7 +56,7 @@ describe('ChampionEndpoint Testsuite', function () {
 				data.Akali.should.not.have.property('image');
 			});
 		});
-		describe('options', function () {
+		describe.skip('options', function () {
 			it('version: can get a specific ddragon version of all champions', function () {
 				const version = '7.10.1';
 				return endpoint.gettingChampions({version})
@@ -80,7 +82,7 @@ describe('ChampionEndpoint Testsuite', function () {
 		});
 
 	});
-	describe('gettingSummonerSpellsById', function () {
+	describe.skip('gettingSummonerSpellsById', function () {
 		it('gets the data for specific champion', function () {
 			return endpoint.gettingChampionById(mock_champion.id)
 				.should.eventually.have.property('id')
@@ -96,7 +98,7 @@ describe('ChampionEndpoint Testsuite', function () {
 				champion.should.not.have.property('image');
 			});
 		});
-		describe('options', function () {
+		describe.skip('options', function () {
 			it('version: can get a specific ddragon version of the champion', function () {
 				const version = '7.10.1';
 				return endpoint.gettingChampionById(mock_champion.id, {version})
@@ -117,7 +119,7 @@ describe('ChampionEndpoint Testsuite', function () {
 
 	});
 
-	describe('gettingItems', function () {
+	describe.skip('gettingItems', function () {
 		it('gets the data for all items', function () {
 			return endpoint.gettingItems()
 				.should.eventually.have.property('data');
@@ -145,7 +147,7 @@ describe('ChampionEndpoint Testsuite', function () {
 				testItem.should.not.have.property('image');
 			});
 		});
-		describe('options', function () {
+		describe.skip('options', function () {
 			it('version: can get a specific ddragon version of all champions', function () {
 				const version = '7.10.1';
 				return endpoint.gettingItems({version})
@@ -166,7 +168,7 @@ describe('ChampionEndpoint Testsuite', function () {
 		});
 
 	});
-	describe('gettingItemById', function () {
+	describe.skip('gettingItemById', function () {
 		it('gets the data for a specific item', function () {
 			return endpoint.gettingItemById(mock_item.id)
 				.should.eventually.have.property('id')
@@ -187,7 +189,7 @@ describe('ChampionEndpoint Testsuite', function () {
 			return endpoint.gettingItemById(mock_item.id)
 				.should.eventually.not.have.property('group');
 		});
-		describe('options', function () {
+		describe.skip('options', function () {
 			it('version: can get a specific ddragon version of all champions', function () {
 				const version = '7.10.1';
 				return endpoint.gettingItemById(mock_item.id, {version})
@@ -209,21 +211,21 @@ describe('ChampionEndpoint Testsuite', function () {
 
 	});
 
-	describe('gettingLanguageStrings', function () {
+	describe.skip('gettingLanguageStrings', function () {
 		it('gets the data for language strings', function () {
 			return endpoint.gettingLanguageStrings()
 				.should.eventually.have.property('type')
 				.equal('language');
 		});
 	});
-	describe('gettingLanguages', function () {
+	describe.skip('gettingLanguages', function () {
 		it('gets the locale-strings supported by the region', function () {
 			return endpoint.gettingLanguages()
 				.should.eventually.be.an('Array')
 				.and.include('en_US');
 		});
 	});
-	describe('gettingMaps', function () {
+	describe.skip('gettingMaps', function () {
 		it('gets the map-data', function () {
 			return endpoint.gettingMaps()
 				.should.eventually.have.property('type')
@@ -231,7 +233,7 @@ describe('ChampionEndpoint Testsuite', function () {
 		});
 	});
 
-	describe('gettingMasteries', function () {
+	describe.skip('gettingMasteries', function () {
 		it('gets the data for all masteries', function () {
 			return endpoint.gettingMasteries()
 				.should.eventually.have.property('data');
@@ -254,7 +256,7 @@ describe('ChampionEndpoint Testsuite', function () {
 				testMastery.should.not.have.property('image');
 			});
 		});
-		describe('options', function () {
+		describe.skip('options', function () {
 			it('version: can get a specific ddragon version', function () {
 				const version = '7.10.1';
 				return endpoint.gettingMasteries({version})
@@ -282,7 +284,7 @@ describe('ChampionEndpoint Testsuite', function () {
 		});
 
 	});
-	describe('gettingMasteryById', function () {
+	describe.skip('gettingMasteryById', function () {
 		it('gets the data for specific mastery', function () {
 			return endpoint.gettingMasteryById(mock_mastery.id)
 				.should.eventually.have.property('id')
@@ -297,7 +299,7 @@ describe('ChampionEndpoint Testsuite', function () {
 				mastery.should.not.have.property('image');
 			});
 		});
-		describe('options', function () {
+		describe.skip('options', function () {
 			it('version: can get a specific ddragon version', function () {
 				const version = '7.10.1';
 				return endpoint.gettingMasteryById(mock_mastery.id,{version})
@@ -319,21 +321,21 @@ describe('ChampionEndpoint Testsuite', function () {
 
 	});
 
-	describe('gettingProfileIcons', function () {
+	describe.skip('gettingProfileIcons', function () {
 		it('gets the profile-icons', function () {
 			return endpoint.gettingProfileIcons()
 				.should.eventually.have.property('type')
 				.equal('profileicon');
 		});
 	});
-	describe('gettingRealms', function () {
+	describe.skip('gettingRealms', function () {
 		it('gets realm info', function () {
 			return endpoint.gettingRealms()
 				.should.eventually.have.property('profileiconmax');
 		});
 	});
 
-	describe('gettingRunes', function () {
+	describe.skip('gettingRunes', function () {
 		it('gets the data for all', function () {
 			return endpoint.gettingRunes()
 				.should.eventually.have.property('data');
@@ -357,7 +359,7 @@ describe('ChampionEndpoint Testsuite', function () {
 				testRune.should.not.have.property('image');
 			});
 		});
-		describe('options', function () {
+		describe.skip('options', function () {
 			it('version: can get a specific ddragon version', function () {
 				const version = '7.10.1';
 				return endpoint.gettingRunes({version})
@@ -378,7 +380,7 @@ describe('ChampionEndpoint Testsuite', function () {
 		});
 
 	});
-	describe('gettingRunesById', function () {
+	describe.skip('gettingRunesById', function () {
 		it('gets the data for specific rune', function () {
 			return endpoint.gettingRunesById(mock_rune.id)
 				.should.eventually.have.property('id')
@@ -394,7 +396,7 @@ describe('ChampionEndpoint Testsuite', function () {
 				mastery.should.not.have.property('image');
 			});
 		});
-		describe('options', function () {
+		describe.skip('options', function () {
 			it('version: can get a specific ddragon version', function () {
 				const version = '7.10.1';
 				return endpoint.gettingRunesById(mock_rune.id,{version})
@@ -417,7 +419,7 @@ describe('ChampionEndpoint Testsuite', function () {
 	});
 
 
-	describe('gettingSummonerSpells', function () {
+	describe.skip('gettingSummonerSpells', function () {
 		it('gets the data for all champions', function () {
 			return endpoint.gettingSummonerSpells()
 				.should.eventually.have.property('data');
@@ -441,7 +443,7 @@ describe('ChampionEndpoint Testsuite', function () {
 				data[mock_summonerSpell.key].should.not.have.property('image');
 			});
 		});
-		describe('options', function () {
+		describe.skip('options', function () {
 			it('version: can get a specific ddragon version of all champions', function () {
 				const version = '7.10.1';
 				return endpoint.gettingSummonerSpells({version})
@@ -467,7 +469,7 @@ describe('ChampionEndpoint Testsuite', function () {
 		});
 
 	});
-	describe('gettingSummonerSpellsById', function () {
+	describe.skip('gettingSummonerSpellsById', function () {
 		it('gets the data for specific summonerSpell', function () {
 			return endpoint.gettingSummonerSpellsById(mock_summonerSpell.id)
 				.should.eventually.have.property('id')
@@ -484,7 +486,7 @@ describe('ChampionEndpoint Testsuite', function () {
 				summonerSpell.should.not.have.property('image');
 			});
 		});
-		describe('options', function () {
+		describe.skip('options', function () {
 			it('version: can get a specific ddragon version', function () {
 				const version = '7.10.1';
 				return endpoint.gettingSummonerSpellsById(mock_summonerSpell.id, {version})
@@ -505,7 +507,7 @@ describe('ChampionEndpoint Testsuite', function () {
 
 	});
 
-	describe('gettingVersions', function () {
+	describe.skip('gettingVersions', function () {
 		it('gets all valid version-strings for data dragon resources', function () {
 			return endpoint.gettingVersions()
 				.should.eventually.be.an('Array')

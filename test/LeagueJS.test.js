@@ -46,7 +46,7 @@ describe('League of Legends api wrapper test suite', function() {
 			});
 		});
 	});
-	describe('setRateLimit', function () {
+	describe.skip('setRateLimit', function () { // deprecated
 		let api;
 		beforeEach(function () {
 			api = new LeagueJs('test', {

@@ -11,13 +11,18 @@ describe('ApiRequest Testsuite', function () {
 	chai.should();
 
 	const ApiRequest = require('../lib/ApiRequest');
+	const RiotRateLimiter = require('riot-ratelimiter');
 
 
 	const mock_urlWithJSONResponse = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/Aatrox.json';
 	const mock_urlWithNonJSONResponse = 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg';
 	const mock_urlWith404 = 'http://ddragon.leagueoflegends.com';
 
-	const mock_validOptions = {token: 'some token'};
+	let mock_validOptions;
+
+	beforeEach(function () {
+		mock_validOptions = {token: 'some token', rateLimiter: new RiotRateLimiter()};
+	});
 
 
 	it('needs an url to execute', function () {
@@ -70,7 +75,8 @@ describe('ApiRequest Testsuite', function () {
 		it('executing() can return the full response from the request', function () {
 			return ApiRequest.executing(mock_urlWithJSONResponse, {
 				token: mock_validOptions.token,
-				resolveWithFullResponse: true
+				resolveWithFullResponse: true,
+				rateLimiter: new RiotRateLimiter()
 			})
 				.should.eventually.be.an('object')
 				.with.property('headers');
