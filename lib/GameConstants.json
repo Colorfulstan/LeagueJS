@@ -17,17 +17,9 @@
 	  "queueType": 0,
 	  "name": "Custom games"
 	},
-	"NORMAL_3x3": {
-	  "queueType": 8,
-	  "name": "Normal 3v3 games"
-	},
 	"NORMAL_5x5_BLIND": {
 	  "queueType": 2,
 	  "name": "Normal 5v5 Blind Pick games"
-	},
-	"NORMAL_5x5_DRAFT": {
-	  "queueType": 14,
-	  "name": "Normal 5v5 Draft Pick games"
 	},
 	"RANKED_SOLO_5x5": {
 	  "queueType": 4,
@@ -37,6 +29,14 @@
 	  "queueType": 6,
 	  "name": "Ranked Premade 5v5 games"
 	},
+	"BOT_5x5*": {
+	  "queueType": 7,
+	  "name": "Historical Summoner's Rift Coop vs AI games"
+	},
+	"NORMAL_3x3": {
+	  "queueType": 8,
+	  "name": "Normal 3v3 games"
+	},
 	"RANKED_PREMADE_3x3*": {
 	  "queueType": 9,
 	  "name": "Used for both historical Ranked Premade 3v3 games and current Ranked Flex Twisted Treeline games"
@@ -45,13 +45,9 @@
 	  "queueType": 9,
 	  "name": "Used for both historical Ranked Premade 3v3 games and current Ranked Flex Twisted Treeline games"
 	},
-	"RANKED_TEAM_3x3*": {
-	  "queueType": 41,
-	  "name": "Ranked Team 3v3 games"
-	},
-	"RANKED_TEAM_5x5": {
-	  "queueType": 42,
-	  "name": "Ranked Team 5v5 games"
+	"NORMAL_5x5_DRAFT": {
+	  "queueType": 14,
+	  "name": "Normal 5v5 Draft Pick games"
 	},
 	"ODIN_5x5_BLIND": {
 	  "queueType": 16,
@@ -60,10 +56,6 @@
 	"ODIN_5x5_DRAFT": {
 	  "queueType": 17,
 	  "name": "Dominion 5v5 Draft Pick games"
-	},
-	"BOT_5x5*": {
-	  "queueType": 7,
-	  "name": "Historical Summoner's Rift Coop vs AI games"
 	},
 	"BOT_ODIN_5x5": {
 	  "queueType": 25,
@@ -80,6 +72,14 @@
 	"BOT_5x5_INTERMEDIATE": {
 	  "queueType": 33,
 	  "name": "Historical Summoner's Rift Coop vs AI Intermediate Bot games"
+	},
+	"RANKED_TEAM_3x3*": {
+	  "queueType": 41,
+	  "name": "Ranked Team 3v3 games"
+	},
+	"RANKED_TEAM_5x5": {
+	  "queueType": 42,
+	  "name": "Ranked Team 5v5 games"
 	},
 	"BOT_TT_3x3": {
 	  "queueType": 52,
