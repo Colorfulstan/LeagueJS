@@ -10,7 +10,7 @@
 	"PRESEASON2016": 6,
 	"SEASON2016": 7,
 	"PRESEASON2017": 8,
-	"SEASON2017":9
+	"SEASON2017": 9
   },
   "matchMakingQueues": {
 	"CUSTOM": {
@@ -242,7 +242,26 @@
 	"16": {
 	  "name": "Cosmic Ruins",
 	  "notes": "Darkstar Map"
+	},
+	"18": {
+	  "name": "Valoran City Park",
+	  "notes": "Star Guardian Invasion Map"
 	}
+  },
+  "gameModes": {
+	"CLASSIC": "Classic Summoner's Rift and Twisted Treeline games",
+	"ODIN": "Dominion/Crystal Scar games",
+	"ARAM": "ARAM games",
+	"TUTORIAL": "Tutorial games",
+	"ONEFORALL": "One for All games",
+	"ASCENSION": "Ascension games",
+	"FIRSTBLOOD": "Snowdown Showdown games",
+	"KINGPORO": "King Poro games",
+	"SIEGE": "Nexus Siege games",
+	"ASSASSINATE": "Blood Hunt Assassin games",
+	"ARSR": "All Random Summoner's Rift games",
+	"DARKSTAR": "Darkstar games",
+	"STARGUARDIAN": "Star Guardian Invasion games"
   },
   "gameMatchModes": {
 	"CLASSIC": "Classic Summoner's Rift and Twisted Treeline games",
@@ -256,7 +275,13 @@
 	"SIEGE": "Nexus Siege games",
 	"ASSASSINATE": "Blood Hunt Assassin games",
 	"ARSR": "All Random Summoner's Rift games",
-	"DARKSTAR": "Darkstar games"
+	"DARKSTAR": "Darkstar games",
+	"STARGUARDIAN": "Star Guardian Invasion games"
+  },
+  "gameTypes": {
+	"CUSTOM_GAME": "Custom games",
+	"TUTORIAL_GAME": "Tutorial games",
+	"MATCHED_GAME": "All other games"
   },
   "gameMatchTypes": {
 	"CUSTOM_GAME": "Custom games",
@@ -290,7 +315,8 @@
 	"SIEGE": "Nexus Siege games",
 	"RANKED_FLEX_TT": "Ranked Flex Twisted Treeline games",
 	"RANKED_FLEX_SR": "Ranked Flex Summoner's Rift games",
-	"DARKSTAR": "Darkstar games"
+	"DARKSTAR": "Darkstar games",
+	"STARGUARDIAN": "Star Guardian Invasion games"
   },
   "playerStatSummaryTypes": {
 	"Unranked": "Summoner's Rift unranked games",
