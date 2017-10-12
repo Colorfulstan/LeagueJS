@@ -34,6 +34,7 @@ describe('SummonerEndpoint Testsuite', function () {
 		it('rejects if name contains invalid characters ', function () {
 			return endpoint.gettingByName(mock_invalidName, mock_summoner.platformId).should.eventually.be.rejectedWith('$ | !§');
 		});
+
 	});
 
 
@@ -81,6 +82,7 @@ describe('SummonerEndpoint Testsuite', function () {
 				});
 			});
 		});
+
 		it('repeated (same) requests should take no time (using cached request)', function () {
 			const time1 = new Date().getTime();
 			 return cachedEnpoint.gettingById(mock_summoner.summonerId, mock_summoner.platformId).then(() => {
