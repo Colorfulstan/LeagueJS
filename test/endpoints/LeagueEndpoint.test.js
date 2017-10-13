@@ -15,6 +15,7 @@ describe('LeagueEndpoint Testsuite', function () {
 
 	const mock_summoner = TestUtil.mocks.summoners.Colorfulstan;
 	const mock_rankedSoloQueueConfigId = 'RANKED_SOLO_5x5';
+	const mock_leagueid = TestUtil.mocks.leagueId;
 
 	let endpoint;
 	beforeEach(function () {
@@ -44,6 +45,13 @@ describe('LeagueEndpoint Testsuite', function () {
 		it('can request the leagues for a specific summonerId', function () {
 			return endpoint.gettingLeagueForSummonerId(mock_summoner.summonerId, mock_summoner.platformId)
 				.should.eventually.be.an('Array');
+		});
+	});
+
+	describe('gettingLeagueById', function () {
+		it('can request a league for a specific leagueId', function () {
+			return endpoint.gettingLeagueById(mock_leagueid.id, mock_leagueid.platformId)
+				.should.eventually.have.property('tier')
 		});
 	});
 
