@@ -34,6 +34,7 @@ class TestUtil {
 			invalidData: {
 				summonerName: 'n$ame12!§3'
 			},
+			leagueId: {id: "1a3cc7ff-9b40-3927-b646-8d777e97148a", platformId: 'NA1' },
 			champions: {Akali: {id: 84}},
 			items: {IonianBoots: {id: 3158}},
 			masteries: {Fury: {id: 6111}},
