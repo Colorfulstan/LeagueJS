@@ -21,7 +21,7 @@ describe('GameConstantsUtil Testsuite', function () {
 	});
 	describe('rankedQueueIds()', function () {
 		it('gets ranked queue ids (including deprecated ones)', function () {
-			GameConstantsUtil.rankedQueueIds().should.have.length(9);
+			GameConstantsUtil.rankedQueueIds().should.have.length(10);
 		});
 	});
 	describe('mostRecentSeasonIds()', function () {

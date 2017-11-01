@@ -21,10 +21,10 @@ describe('ErrorUtil Testsuite', function () {
 	});
 	describe('throwIfNameIsInvalid()', function () {
 		it('throws if name contains invalid characters ', function () {
-			expect(()=>{ErrorUtil.throwIfNameIsInvalid('n$ame12!§3');}).to.throw('$ | !§');
+			expect(()=>{ErrorUtil.throwIfNameIsInvalid('n$ame12!§3');}).to.throw('$ | ! | §');
 		});
 		it('does not throw if name is valid', function () {
-			expect(()=>{ErrorUtil.throwIfNameIsInvalid('na 123 me._');}).not.to.throw('$ | !§');
+			expect(()=>{ErrorUtil.throwIfNameIsInvalid('na 123 me._');}).not.to.throw('$ | ! | §');
 		});
 	});
 	describe('throwIfNotBoolean()', function () {
