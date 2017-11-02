@@ -19,8 +19,7 @@ describe('MatchUtil Testsuite', function () {
 				.should.equal(expected);
 		});
 		describe('multiple same major.minor versions in versions array', function () {
-			// NOTE: versions array from static-data only contains a single version per major.minor
-			// and is sorted from latest to earliest, so these should not be an issue.
+			// NOTE: versions array from static-data is sorted from latest to earliest, so these should not be an issue.
 			// Tests are only provided to clarify possible shortcommings of this method.
 			it('gets the latest version when versions array is sorted from latest to earliest', function () {
 				const expected = ('5.1.5');
@@ -37,6 +36,17 @@ describe('MatchUtil Testsuite', function () {
 				MatchUtil.getVersionForGameVersion('5.3.8.123452', ['5.1.5', '5.1.3', '5.1.2'])
 					.should.equal(expected);
 			});
+
+            it('does get the latest version if given gameVersion cant be matched (ascending Array)', function () {
+                const expected = ('5.1.5');
+                MatchUtil.getVersionForGameVersion('5.3.8.123452', ['5.1.5', '5.1.3', '5.1.2'].reverse())
+                    .should.equal(expected);
+            });
+            it('does get the latest version if given gameVersion cant be matched (unsorted Array)', function () {
+                const expected = ('5.1.5');
+                MatchUtil.getVersionForGameVersion('5.3.8.123452', ['5.1.2', '5.1.5', '5.1.3', ])
+                    .should.equal(expected);
+            });
 		});
 	});
 	describe('getPatchFromGameVersion()', function () {
