@@ -57,4 +57,24 @@ describe('MatchUtil Testsuite', function () {
 			MatchUtil.getPatchFromGameVersion('5.1').should.equal(expected);
 		});
 	});
+	describe('sortVersionsDescending()', function () {
+		it('returns > 0 if the first parameter is "bigger"', function () {
+			MatchUtil.sortVersionsDescending('4.1.1', '5.1.1').should.be.above(0);
+			MatchUtil.sortVersionsDescending('5.0.1', '5.1.1').should.be.above(0);
+			MatchUtil.sortVersionsDescending('5.1.0', '5.1.1').should.be.above(0);
+			MatchUtil.sortVersionsDescending('4', '5').should.be.above(0);
+			MatchUtil.sortVersionsDescending('5.0', '5.1').should.be.above(0);
+		});
+		it('returns < 0 if the first parameter is "bigger"', function () {
+			MatchUtil.sortVersionsDescending('5.1.1', "4.1.1").should.be.below(0);
+			MatchUtil.sortVersionsDescending('5.1.1', "5.0.1").should.be.below(0);
+			MatchUtil.sortVersionsDescending('5.1.1', "5.1.0").should.be.below(0);
+			MatchUtil.sortVersionsDescending('5', "4").should.be.below(0);
+			MatchUtil.sortVersionsDescending('5.1', "5.0").should.be.below(0);
+		});
+		it('returns 0 if parameters are same up to patch level', function () {
+			const expected = 0;
+			MatchUtil.sortVersionsDescending('5.1.8.10.20.30', '5.1.8.5.20.30').should.equal(expected);
+		});
+	});
 });
