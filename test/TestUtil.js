@@ -1,4 +1,3 @@
-const deepmerge = require('deepmerge');
 const Config = require('../lib/Config');
 const RiotRateLimiter = require('riot-ratelimiter');
 const STRATEGY = require('riot-ratelimiter/dist/RateLimiter').STRATEGY;
@@ -11,6 +10,10 @@ class TestUtil {
 		// NOTE: add your dev-api key to the config.json before running
 		if (typeof mergedConfig.API_KEY === 'undefined' || mergedConfig.API_KEY === '') {
 			throw new Error("The API_KEY is needed. Please add it to /test/config.json or as process.env.LEAGUE_API_KEY");
+		}
+		if (typeof mergedConfig.debug === 'undefined'){
+			console.warn('LeagueJS: Setting debug:true for test execution');
+			mergedConfig.debug = true;
 		}
 		return mergedConfig;
 	}
