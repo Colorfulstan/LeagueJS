@@ -51,7 +51,7 @@ describe('MatchEndpoint Testsuite', function () {
 			return endpoint.gettingListByAccount(mock_summoner.accountId, mock_summoner.platformId)
 				.should.eventually.have.property('matches')
 				.an('Array')
-				.with.length.of.at.least(100);
+				.with.length(100);
 		});
 		it('can request the matchlist for multiple summoners in parallel', function () {
 			this.timeout(0);
@@ -71,6 +71,73 @@ describe('MatchEndpoint Testsuite', function () {
 				// console.log(accountId, platformId);
 
 				return endpoint.gettingListByAccount(accountId, platformId)
+					.then(matchListDto => {
+						// console.log(accountId, platformId);
+						// console.log(matchListDto.matches[0]);
+						return endpoint.gettingById(matchListDto.matches[0].gameId, matchListDto.matches[0].platformId);
+					});
+			}
+
+			return Promise.all([
+				gettingFirstMatchFromMatchList(accountIds[0], platformId),
+				gettingFirstMatchFromMatchList(accountIds[1], platformId),
+				gettingFirstMatchFromMatchList(accountIds[2], platformId),
+				gettingFirstMatchFromMatchList(accountIds[3], platformId),
+				gettingFirstMatchFromMatchList(accountIds[4], platformId),
+				gettingFirstMatchFromMatchList(accountIds[5], platformId),
+				gettingFirstMatchFromMatchList(accountIds[6], platformId)]).then(matchDtos => {
+				matchDtos.forEach((matchDto, index)=>{
+					// console.log(accountIds[index], matchDto.participantIdentities.map(identity => identity.player));
+					let playerFound = matchDto.participantIdentities.find(identity => (identity.player.currentAccountId === accountIds[index] || identity.player.accountId === accountIds[index]));
+					expect(playerFound).to.exist;
+				});
+			});
+		});
+	});
+	describe('gettingListByAccountWithoutPagination', function () {
+		it.skip('can request the matchlist for an account', function () {
+			return endpoint.gettingListByAccountWithoutPagination(mock_summoner.accountId, mock_summoner.platformId)
+				.should.eventually.have.property('matches')
+				.an('Array')
+				.with.length(100);
+		});
+		it('can request less then 100 matches', function () {
+			return endpoint.gettingListByAccountWithoutPagination(mock_summoner.accountId, mock_summoner.platformId, {endIndex:10})
+				.should.eventually.have.property('matches')
+				.an('Array')
+				.with.length(10);
+		});
+		it('can request exactly 100 matches', function () {
+			return endpoint.gettingListByAccountWithoutPagination(mock_summoner.accountId, mock_summoner.platformId, {beginIndex:53, endIndex:153})
+				.should.eventually.have.property('matches')
+				.an('Array')
+				.with.length(100);
+		});
+		it('can request more then 100 matches', function () {
+			this.timeout(0);
+			return endpoint.gettingListByAccountWithoutPagination(mock_summoner.accountId, mock_summoner.platformId, {beginIndex:132, endIndex:453})
+				.should.eventually.have.property('matches')
+				.an('Array')
+				.with.length(453-132);
+		});
+		it('can request the matchlist for multiple summoners in parallel', function () {
+			this.timeout(0);
+
+			const accountIds = [
+				24885403,
+				42347345,
+				21977757,
+				33121340,
+				31385891,
+				28631306,
+				22242237
+			];
+			const platformId = 'euw1';
+
+			function gettingFirstMatchFromMatchList(accountId, platformId){
+				// console.log(accountId, platformId);
+
+				return endpoint.gettingListByAccountWithoutPagination(accountId, platformId, {endIndex:1})
 					.then(matchListDto => {
 						// console.log(accountId, platformId);
 						// console.log(matchListDto.matches[0]);
