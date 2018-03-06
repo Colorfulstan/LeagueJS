@@ -1,6 +1,7 @@
 describe('StaticDataEndpoint Testsuite', function () { // due to very low method limits not feasible to run all tests. Run single tests on demand!
 	'use strict';
 
+	const Bluebird = require('bluebird');
 	const StaticDataEndpoint = require('../../lib/endpoints/StaticDataEndpoint');
 
 	const chai = require("chai");
@@ -16,8 +17,6 @@ describe('StaticDataEndpoint Testsuite', function () { // due to very low method
 	const mock_summoner = TestUtil.mocks.summoners.Colorfulstan;
 	const mock_champion = TestUtil.mocks.champions.Akali;
 	const mock_item = TestUtil.mocks.items.IonianBoots;
-	const mock_mastery = TestUtil.mocks.masteries.Fury;
-	const mock_rune = TestUtil.mocks.runes.lesserMarkOfAttackSpeed;
 	const mock_summonerSpell = TestUtil.mocks.summonerSpells.Flash;
 
 	let endpoint;
@@ -418,6 +417,52 @@ describe('StaticDataEndpoint Testsuite', function () { // due to very low method
 
 	});
 
+	describe('gettingReforgedRunesPaths', function () {
+		it('gets a list of all paths', function () {
+			return endpoint.gettingReforgedRunesPaths()
+				.tap(result => {if (mergedConfig.debug) {console.log(JSON.stringify(result, null, 2));}})
+				.should.eventually.be.an('Array')
+				.with.length(5);
+		});
+		it('gets a list of all paths for a certain version', function () {
+			return endpoint.gettingReforgedRunesPaths(null, {version: '8.4.1'})
+				.tap(result => {if (mergedConfig.debug) {console.log(JSON.stringify(result, null, 2));}})
+				.should.eventually.be.an('Array')
+				.with.length(5);
+		});
+	});
+	describe('gettingReforgedRunesPathById', function () {
+		it('gets a path object', function () {
+			return endpoint.gettingReforgedRunesPathById(8200)
+				.tap(result => {if (mergedConfig.debug) {console.log(JSON.stringify(result, null, 2));}})
+				.should.eventually.have.property('id', 8200);
+		});
+	});
+
+	describe('gettingReforgedRunes', function () {
+		it('gets a list of all Runes', function () {
+			return endpoint.gettingReforgedRunes()
+				.tap(result => {if (mergedConfig.debug) {console.log(JSON.stringify(result, null, 2));}})
+				.should.eventually.be.an('Array')
+				.with.length(61);
+		});
+		it('gets a list of all Runes for a certain version', function () {
+			return endpoint.gettingReforgedRunes(null, {version: '8.4.1'})
+				.tap(result => {if (mergedConfig.debug) {console.log(JSON.stringify(result, null, 2));}})
+				.should.eventually.be.an('Array')
+				.with.length(61);
+		});
+	});
+	describe('gettingReforgedRuneById', function () {
+		it('gets a Rune', function () {
+			const result = endpoint.gettingReforgedRuneById(8134)
+				.tap(result => {if (mergedConfig.debug) {console.log(JSON.stringify(result, null, 2));}});
+			return Bluebird.resolve([
+				result.should.eventually.have.property('id', 8134),
+				result.should.eventually.have.property('runePathId', 8100)
+			]);
+		});
+	});
 
 	describe.skip('gettingSummonerSpells', function () {
 		it('gets the data for all champions', function () {
@@ -507,6 +552,19 @@ describe('StaticDataEndpoint Testsuite', function () { // due to very low method
 
 	});
 
+	describe('gettingTarballLinks', function () {
+		it('gets the url for the ddragon tarball download', function () {
+			return endpoint.gettingTarballLinks()
+				.tap(result => {if (mergedConfig.debug) {console.log(JSON.stringify(result, null, 2));}})
+				.should.eventually.be.an('string')
+				.and.contain('http://ddragon.leagueoflegends.com/cdn/dragontail');
+		});
+		it('gets the url for the ddragon tarball download for a certain patch', function () {
+			return endpoint.gettingTarballLinks(null, {version: '8.4.1'})
+				.tap(result => {if (mergedConfig.debug) {console.log(JSON.stringify(result, null, 2));}})
+				.should.eventually.equal('http://ddragon.leagueoflegends.com/cdn/dragontail-8.4.1.tgz');
+		});
+	});
 	describe.skip('gettingVersions', function () {
 		it('gets all valid version-strings for data dragon resources', function () {
 			return endpoint.gettingVersions()
