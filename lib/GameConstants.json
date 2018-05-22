@@ -1,5 +1,5 @@
 {
-	"updatedAt": "2017-05-26T12:13:00.503Z",
+	"updatedAt": "2018-05-22T22:05:00.000Z",
 	"seasons": {
 		"PRESEASON3": 0,
 		"SEASON3": 1,
@@ -261,7 +261,12 @@
 			"queue": 70,
 			"gameQueueConfigId": 70,
 			"mapId": 11,
-			"name": "One for All games"
+			"name": "One for All games",
+			"deprecation": {
+				"deprecated": true,
+				"sincePatch": "8.6",
+				"replacement": 1020
+			}
 		},
 		"FIRSTBLOOD_1x1": {
 			"queueType": 72,
@@ -317,7 +322,12 @@
 			"queue": 91,
 			"gameQueueConfigId": 91,
 			"mapId": 11,
-			"name": "Doom Bots Rank 1 games"
+			"name": "Doom Bots Rank 1 games",
+			"deprecation": {
+				"deprecated": true,
+				"sincePatch": "7.19",
+				"replacement": 950
+			}
 		},
 		"NIGHTMARE_BOT_5x5_RANK2": {
 			"queueType": 92,
@@ -325,7 +335,12 @@
 			"queue": 92,
 			"gameQueueConfigId": 92,
 			"mapId": 11,
-			"name": "Doom Bots Rank 2 games"
+			"name": "Doom Bots Rank 2 games",
+			"deprecation": {
+				"deprecated": true,
+				"sincePatch": "7.19",
+				"replacement": 950
+			}
 		},
 		"NIGHTMARE_BOT_5x5_RANK5": {
 			"queueType": 93,
@@ -333,7 +348,12 @@
 			"queue": 93,
 			"gameQueueConfigId": 93,
 			"mapId": 11,
-			"name": "Doom Bots Rank 5 games"
+			"name": "Doom Bots Rank 5 games",
+			"deprecation": {
+				"deprecated": true,
+				"sincePatch": "7.19",
+				"replacement": 950
+			}
 		},
 		"ASCENSION_5x5": {
 			"queueType": 96,
@@ -341,7 +361,12 @@
 			"queue": 96,
 			"gameQueueConfigId": 96,
 			"mapId": 8,
-			"name": "Ascension games"
+			"name": "Ascension games",
+			"deprecation": {
+				"deprecated": true,
+				"sincePatch": "7.19",
+				"replacement": 910
+			}
 		},
 		"HEXAKILL": {
 			"queueType": 98,
@@ -365,7 +390,12 @@
 			"queue": 300,
 			"gameQueueConfigId": 300,
 			"mapId": 12,
-			"name": "King Poro games"
+			"name": "King Poro games",
+			"deprecation": {
+				"deprecated": true,
+				"sincePatch": "7.19",
+				"replacement": 920
+			}
 		},
 		"COUNTER_PICK": {
 			"queueType": 310,
@@ -418,7 +448,12 @@
 			"queue": 318,
 			"gameQueueConfigId": 318,
 			"mapId": 11,
-			"name": "All Random URF games"
+			"name": "All Random URF games",
+			"deprecation": {
+				"deprecated": true,
+				"sincePatch": "7.19",
+				"replacement": 900
+			}
 		},
 		"ARSR_5x5": {
 			"queueType": 325,
@@ -512,6 +547,14 @@
 			"mapId": 16,
 			"name": "Darkstar games"
 		},
+		"5v5_CLASH": {
+			"queueType": 700,
+			"queueId": 700,
+			"queue": 700,
+			"gameQueueConfigId": 700,
+			"mapId": 11,
+			"name": "Clash games"
+		},
 		"3v3_BOT_INTERMEDIATE": {
 			"queueType": 800,
 			"queueId": 800,
@@ -560,6 +603,30 @@
 			"mapId": 11,
 			"name": "Co-op vs. AI Intermediate Bot games"
 		},
+		"ARURF": {
+			"queueType": 900,
+			"queueId": 900,
+			"queue": 900,
+			"gameQueueConfigId": 900,
+			"mapId": 11,
+			"name": "ARURF games"
+		},
+		"ASCENSION": {
+			"queueType": 910,
+			"queueId": 910,
+			"queue": 910,
+			"gameQueueConfigId": 910,
+			"mapId": 8,
+			"name": "Ascension games"
+		},
+		"PORO_KING": {
+			"queueType": 920,
+			"queueId": 920,
+			"queue": 920,
+			"gameQueueConfigId": 920,
+			"mapId": 12,
+			"name": "Legend of the Poro King games"
+		},
 		"NEXUS_SIEGE": {
 			"queueType": 940,
 			"queueId": 940,
@@ -567,6 +634,22 @@
 			"gameQueueConfigId": 940,
 			"mapId": 11,
 			"name": "Nexus Siege games"
+		},
+		"DOOM_BOT_VOTE": {
+			"queueType": 950,
+			"queueId": 950,
+			"queue": 950,
+			"gameQueueConfigId": 950,
+			"mapId": 11,
+			"name": "Doom Bots Voting games"
+		},
+		"DOOM_BOT_STANDARD": {
+			"queueType": 960,
+			"queueId": 960,
+			"queue": 960,
+			"gameQueueConfigId": 960,
+			"mapId": 11,
+			"name": "Doom Bots Standard games"
 		},
 		"INVASION_NORMAL": {
 			"queueType": 980,
@@ -599,6 +682,14 @@
 			"gameQueueConfigId": 1010,
 			"mapId": 11,
 			"name": "Snow ARURF games"
+		},
+		"ONEFORALL": {
+			"queueType": 1020,
+			"queueId": 1020,
+			"queue": 1020,
+			"gameQueueConfigId": 1020,
+			"mapId": 11,
+			"name": "One for All games"
 		}
 	},
 	"mapNames": {
@@ -656,6 +747,8 @@
 		"ODIN": "Dominion/Crystal Scar games",
 		"ARAM": "ARAM games",
 		"TUTORIAL": "Tutorial games",
+		"URF": "URF games",
+		"DOOMBOTSTEEMO": "Doom Bot games",
 		"ONEFORALL": "One for All games",
 		"ASCENSION": "Ascension games",
 		"FIRSTBLOOD": "Snowdown Showdown games",
@@ -672,6 +765,8 @@
 		"ODIN": "Dominion/Crystal Scar games",
 		"ARAM": "ARAM games",
 		"TUTORIAL": "Tutorial games",
+		"URF": "URF games",
+		"DOOMBOTSTEEMO": "Doom Bot games",
 		"ONEFORALL": "One for All games",
 		"ASCENSION": "Ascension games",
 		"FIRSTBLOOD": "Snowdown Showdown games",
@@ -692,64 +787,5 @@
 		"CUSTOM_GAME": "Custom games",
 		"TUTORIAL_GAME": "Tutorial games",
 		"MATCHED_GAME": "All other games"
-	},
-	"subTypes": {
-		"NONE": "Custom games",
-		"NORMAL": "Summoner's Rift unranked games",
-		"NORMAL_3x3": "Twisted Treeline unranked games",
-		"ODIN_UNRANKED": "Dominion/Crystal Scar games",
-		"ARAM_UNRANKED_5x5": "ARAM / Howling Abyss games",
-		"BOT": "Summoner's Rift and Crystal Scar games played against Intro, Beginner, or Intermediate AI",
-		"BOT_3x3": "Twisted Treeline games played against AI",
-		"RANKED_SOLO_5x5": "Summoner's Rift ranked solo queue games",
-		"RANKED_TEAM_3x3": "Twisted Treeline ranked team games",
-		"RANKED_TEAM_5x5": "Summoner's Rift ranked team games",
-		"ONEFORALL_5x5": "One for All games",
-		"FIRSTBLOOD_1x1": "Snowdown Showdown 1x1 games",
-		"FIRSTBLOOD_2x2": "Snowdown Showdown 2x2 games",
-		"SR_6x6": "Summoner's Rift 6x6 Hexakill games",
-		"CAP_5x5": "Team Builder games",
-		"URF": "Ultra Rapid Fire games",
-		"URF_BOT": "Ultra Rapid Fire games played against AI",
-		"NIGHTMARE_BOT": "Summoner's Rift games played against Nightmare AI",
-		"ASCENSION": "Ascension games",
-		"HEXAKILL": "Twisted Treeline 6x6 Hexakill games",
-		"KING_PORO": "King Poro games",
-		"COUNTER_PICK": "Nemesis games",
-		"BILGEWATER": "Black Market Brawlers games",
-		"SIEGE": "Nexus Siege games",
-		"RANKED_FLEX_TT": "Ranked Flex Twisted Treeline games",
-		"RANKED_FLEX_SR": "Ranked Flex Summoner's Rift games",
-		"DARKSTAR": "Darkstar games",
-		"STARGUARDIAN": "Star Guardian Invasion games"
-	},
-	"playerStatSummaryTypes": {
-		"Unranked": "Summoner's Rift unranked games",
-		"Unranked3x3": "Twisted Treeline unranked games",
-		"OdinUnranked": "Dominion/Crystal Scar games",
-		"AramUnranked5x5": "ARAM / Howling Abyss games",
-		"CoopVsAI": "Summoner's Rift and Crystal Scar games played against AI",
-		"CoopVsAI3x3": "Twisted Treeline games played against AI",
-		"RankedSolo5x5": "Summoner's Rift ranked solo queue games",
-		"RankedTeam3x3": "Twisted Treeline ranked team games",
-		"RankedTeam5x5": "Summoner's Rift ranked team games",
-		"OneForAll5x5": "One for All games",
-		"FirstBlood1x1": "Snowdown Showdown 1x1 games",
-		"FirstBlood2x2": "Snowdown Showdown 2x2 games",
-		"SummonersRift6x6": "Summoner's Rift 6x6 Hexakill games",
-		"CAP5x5": "Team Builder games",
-		"URF": "Ultra Rapid Fire games",
-		"URFBots": "Ultra Rapid Fire games played against AI",
-		"NightmareBot": "Summoner's Rift games played against Nightmare AI",
-		"Ascension": "Ascension games",
-		"Hexakill": "Twisted Treeline 6x6 Hexakill games",
-		"KingPoro": "King Poro games",
-		"CounterPick": "Nemesis games",
-		"Bilgewater": "Black Market Brawlers games",
-		"Siege": "Nexus Siege games",
-		"RankedFlexTT": "Ranked Flex Twisted Treeline games",
-		"RankedFlexSR": "Ranked Flex Summoner's Rift games",
-		"Arsr": "All Random Summoner's Rift games",
-		"Darkstar": "Darkstar games"
 	}
 }
