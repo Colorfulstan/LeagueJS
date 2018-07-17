@@ -13,6 +13,7 @@ Note: Tournament API is not included at this time
 - [Library Structure](#library-structure)
 	- [Naming conventions](#naming-conventions)
 	- [Endpoints](#endpoints)
+	- [Static Data](#static-data)
 	- [Utility methods](#utility-methods)
 - [Environment Variables](#environment-variables)
 - [Rate Limiting](#rate-limiting)
@@ -76,6 +77,40 @@ api.Spectator
 api.StaticData
 api.Summoner
 ```
+
+#### Static Data
+LeagueJS provides the DataDragonHelper class to handle DataDragon files.
+Please also refer to the [module readme](/lib/DataDragon/README.md) and the respective [unit-tests](/test/DataDragonHelper.test.js)
+for additional usage info.
+
+To use it, either require it directly (if you have to for some reason), or use
+
+```
+// DataDragonHelper will use the provided path to store the downloaded files
+// you have multiple possibilities to set the path
+
+leagueJS.setupDataDragonHelper('absolute/path/for/files')
+leagueJS.setupDataDragonHelper('./relative/path/for/files')
+leagueJS.setupDataDragonHelper([__dirname, '../', 'pathSegments', 'to/be/resolved'])
+
+// to enable logging to the console, pass `true` as second parameter
+// (otherwise you'll need to add listeners to respective leagueJS.DataDragonHelper.events)
+leagueJS.setupDataDragonHelper('absolute/path/for/files', true)
+
+// xxxList methods will take care of downloading the needed files for the requested version.
+// by default, the latest available version will be used with the locale 'en_US'
+leagueJS.DataDragonHelper.gettingItemList()
+
+// will default to 'en_US' locale
+leagueJS.DataDragonHelper.gettingItemList('8.14.1')
+
+// takes version + locale as parameter
+leagueJS.DataDragonHelper.gettingItemList('8.14.1', 'de_DE')
+```
+
+NOTE: all methods besides `gettingXXXList' can be subject to change at this point (2018-07-17)
+as it's not very well designed yet. Please open an Issue if you have suggestions for improvements.
+Breaking changes are unlikely though, and will be documented acchordingly if needed.
 
 #### Utility methods
 Utility methods are located within ```/lib/util``` separated into thematic groups. They can be accessed in 2 ways:
@@ -260,30 +295,30 @@ we are able to create a simple, efficient and more intuitive build process.
 
 - [] TODO: check if all are working and update description if neccessary
 
-Run JSLint on all js files: 
+Run JSLint on all js files:
 
 - `gulp lint`
-	
+
 Run BDD tests:
 
 - `gulp test`
-	
+
 Run istabul to generate a code coverage report:
 
 - `gulp test-coverage`
-	
+
 Run plato to generate a code analysis report:
 
 - `gulp code-report`
-	
+
 Runs both istanbul and plato in with one command:
 
 - `gulp reports`
-	
+
 Removes both coverage and report directories created by istanbul and plato
 
 - `gulp clean-reports`
-	
+
 Sets up a development environment that will watch for code changes then run JSLint and BDD tests upon saving:
 
 - `gulp dev`
