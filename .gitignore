@@ -6,7 +6,7 @@ logs
 results
 coverage
 report
-.idea
+.idea/**
 .DS_Store
 npm-debug.log
 node_modules
