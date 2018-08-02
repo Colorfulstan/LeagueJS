@@ -242,4 +242,29 @@ describe('DataDragonHelper Data methods', function () {
 			});
 		});
 	});
+	describe('gettingLocalList', function () {
+		it('data methods use the latest version from DDragon if Version is not available', function () {
+			return Promise.all([
+				DataDragonHelper.gettingVersions(),
+				DataDragonHelper.gettingSummonerSpellsList('7.10.10')
+			]).then(([versions, spells]) => {
+				const fallbackVersion = versions[0];
+				return expect(fs.existsSync(path.join(testDownloadPath, fallbackVersion, 'en_US', 'champion.json'))).true;
+			});
+		});
+		it('data methods use the given version if it\'s in the versions array', function () {
+			const initialVersion = '7.1.1';
+
+			return Promise.all([
+				DataDragonHelper.gettingVersions(),
+				DataDragonHelper.gettingSummonerSpellsList(initialVersion)
+			]).then(([versions, spells]) => {
+				const fallbackVersion = versions[0];
+				return Promise.all([
+					expect(fs.existsSync(path.join(testDownloadPath, fallbackVersion, 'en_US', 'champion.json'))).false,
+					expect(fs.existsSync(path.join(testDownloadPath, initialVersion, 'en_US', 'champion.json'))).true
+				])
+			});
+		});
+	});
 });
