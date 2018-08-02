@@ -89,14 +89,14 @@ describe('DataDragonHelper setup and download behaviour', function () {
 		describe('downloadingStaticDataByLocale', function () {
 			it('Can Download files', function () {
 				this.timeout(0);
-				return DataDragonHelper.downloadingStaticDataByLocale('en_US', ['8.11.1', '7.15.1']).then(() => {
+				return DataDragonHelper.downloadingStaticDataByLocale('en_US', ['8.11.1', '7.15.1'], 7).then(() => {
 					return Bluebird.all([
 						expect(fs.existsSync(path.join(DataDragonHelper.buildStoragePath({
 							version: '8.11.1',
 							locale: 'en_US'
 						}) + '/champion.json'))).true,
 						expect(fs.existsSync(path.join(DataDragonHelper.buildStoragePath({
-							version: '8.1.1',
+							version: '7.15.1',
 							locale: 'en_US'
 						}) + '/champion.json'))).true
 					]);
@@ -197,12 +197,12 @@ describe('DataDragonHelper setup and download behaviour', function () {
 	});
 });
 describe('DataDragonHelper Data methods', function () {
+	this.timeout(5000);
 
 	before(function (done) {
 		rimraf(testDownloadPath, done);
 	});
 	beforeEach(function () {
-		this.timeout(5000);
 		DataDragonHelper.storageRoot = testDownloadPath;
 	});
 	afterEach(function () {
