@@ -31,9 +31,9 @@ npm install leaguejs --save
 process.env.LEAGUE_API_PLATFORM_ID = 'euw1'
 
 const LeagueJs = require('../lib/LeagueJS.js');
-const api = new LeagueJs(process.env.LEAGUE_API_KEY);
+const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
 
-api.Summoner
+leagueJs.Summoner
 	.gettingByName('EldoranDev')
 	.then(data => {
 		'use strict';
@@ -44,7 +44,7 @@ api.Summoner
 		console.log(err);
 	});
 
-api.Summoner
+leagueJs.Summoner
 	.gettingByAccount(22177292, 'euw')
 	.then(data => {
 		'use strict';
@@ -64,53 +64,50 @@ Endpoints and their methods are named in alignment to the [API documentation](ht
 Methods returning a promise are named in present progressive (gettingXY) while synchronous methods are called in present tense (getXY)
 
 #### Endpoints
-Each Endpoint is located in it's own class, accessible by its name on the leagueJS object.
+Each Endpoint is located in it's own class, accessible by its name on the leagueJs object.
 ```
-api.Champion
-api.ChampionMastery
-api.League
-api.LolStatus
-api.Masteries
-api.Match
-api.Runes
-api.Spectator
-api.StaticData
-api.Summoner
+leagueJs.Champion
+leagueJs.ChampionMastery
+leagueJs.League
+leagueJs.LolStatus
+leagueJs.Masteries
+leagueJs.Match
+leagueJs.Runes
+leagueJs.Spectator
+leagueJs.StaticData
+leagueJs.Summoner
 ```
 
 #### Static Data
+LeagueJS uses DataDragonHelper for StaticData handling.
+
+NOTE: code using LeagueJS 1.9.x or earlier should check their usage of StaticData.gettingChampions, as the returned properties have changed.
+All other StaticData methods can be used as dropin-replacement without any code changes.
+
 LeagueJS provides the DataDragonHelper class to handle DataDragon files.
 Please also refer to the [module readme](/lib/DataDragon/README.md) and the respective [unit-tests](/test/DataDragonHelper.test.js)
 for additional usage info.
 
-To use it, either require it directly (if you have to for some reason), or use
+By default, DataDragonHelper will store DDragonFiles within it's own module-directory.
+To prevent this you can either set the appropriate path during instantiation
+```
+const leagueJs = LeagueJs(process.env.LEAGUE_API_KEY, {STATIC_DATA_ROOT: ...});
+```
+
+or use the setup method within StaticData
 
 ```
 // DataDragonHelper will use the provided path to store the downloaded files
 // you have multiple possibilities to set the path
 
-leagueJS.setupDataDragonHelper('absolute/path/for/files')
-leagueJS.setupDataDragonHelper('./relative/path/for/files')
-leagueJS.setupDataDragonHelper([__dirname, '../', 'pathSegments', 'to/be/resolved'])
+leagueJs.StaticData.setup('absolute/path/for/files')
+leagueJs.StaticData.setup('./relative/path/for/files')
+leagueJs.StaticData.setup([__dirname, '../', 'pathSegments', 'to/be/resolved'])
 
 // to enable logging to the console, pass `true` as second parameter
-// (otherwise you'll need to add listeners to respective leagueJS.DataDragonHelper.events)
-leagueJS.setupDataDragonHelper('absolute/path/for/files', true)
-
-// xxxList methods will take care of downloading the needed files for the requested version.
-// by default, the latest available version will be used with the locale 'en_US'
-leagueJS.DataDragonHelper.gettingItemList()
-
-// will default to 'en_US' locale
-leagueJS.DataDragonHelper.gettingItemList('8.14.1')
-
-// takes version + locale as parameter
-leagueJS.DataDragonHelper.gettingItemList('8.14.1', 'de_DE')
+// (otherwise you'll need to add listeners to respective leagueJs.DataDragonHelper.events)
+leagueJs.StaticData.setup('absolute/path/for/files', true)
 ```
-
-NOTE: all methods besides `gettingXXXList' can be subject to change at this point (2018-07-17)
-as it's not very well designed yet. Please open an Issue if you have suggestions for improvements.
-Breaking changes are unlikely though, and will be documented acchordingly if needed.
 
 #### Utility methods
 Utility methods are located within ```/lib/util``` separated into thematic groups. They can be accessed in 2 ways:
@@ -127,13 +124,13 @@ All Utility methods are implemented as static and pure functions
 
 Alternatively they can be provided to the League constructor within the options parameter
 ```
-const leagueApi = new League(<Your Api key>, {PLATFORM_ID: <default api region>})
+const leagueJs = new League(<Your Api key>, {PLATFORM_ID: <default api region>})
 ```
 
 We recommend you read the API key from your environment variables too and pass that to the LeagueJS constructor
 
 ```
-const leagueApi = new League(process.env.LEAGUE_API_KEY)
+const leagueJs = new League(process.env.LEAGUE_API_KEY)
 ```
 
 ### Rate Limiting
@@ -143,7 +140,7 @@ Code created with LeagueJS < 1.5.0 should not be affected other then that the de
 
 You can change the limiting strategy in two ways:
 ```
-const LeagueJs = require('../lib/LeagueJS.js');
+const leagueJs = require('../lib/LeagueJS.js');
 
 // passing in allowBursts: true on instantiation
 
@@ -198,7 +195,7 @@ If enabled, the default caching is using node-cache with the request-urls as cac
 The easiest way to setup caching is to pass a minimum set of caching options to LeagueJS on instantiation
 
 ```
-const leagueJS = new LeagueJS({
+const leagueJs = new LeagueJS({
 	...
 	caching: {
 			isEnabled: true, // enable basic caching
@@ -211,16 +208,16 @@ const leagueJS = new LeagueJS({
 You can setup caching globally or on an Endpoint basis
 ```
 // replacing Cache-options within Summoner endpoint (overwrites global options for that Endpoint)
-leagueJS.Summoner.setCache({ stdTTL: 120})
+leagueJs.Summoner.setCache({ stdTTL: 120})
 
-leagueJS.Summoner.enableCaching();
-leagueJS.Summoner.disableCaching();
+leagueJs.Summoner.enableCaching();
+leagueJs.Summoner.disableCaching();
 
 // Set caching options for all endpoints (overwrites previously set options)
-leagueJS.setCache({ stdTTL: 120}, MyCache)
-leagueJS.setCache({ stdTTL: 120})
-leagueJS.enableCaching();
-leagueJS.disableCaching();
+leagueJs.setCache({ stdTTL: 120}, MyCache)
+leagueJs.setCache({ stdTTL: 120})
+leagueJs.enableCaching();
+leagueJs.disableCaching();
 ```
 
 Options not explicitly set use following defaults (found in ```/lib/Config.js```)
@@ -263,7 +260,7 @@ You can set your own Caching implementation if you like
 const MyCache = require('myCache')
 
 // replacing Cache during instantiation (for all endpoints)
-const leagueJS = new LeagueJS({
+const leagueJs = new LeagueJS({
 	...
 	caching: {
 			isEnabled: true, // enable caching
@@ -274,10 +271,10 @@ const leagueJS = new LeagueJS({
 
 
 // replacing Cache globally (overwrites previously set options on endpoints)
-leagueJS.setCache({ stdTTL: 120}, MyCache)
+leagueJs.setCache({ stdTTL: 120}, MyCache)
 
 // replacing Cache within specific endpoint (overwrites global options for that Endpoint)
-leagueJS.Summoner.setCache({ stdTTL: 120}, MyCache)
+leagueJs.Summoner.setCache({ stdTTL: 120}, MyCache)
 ```
 
 # Developer
