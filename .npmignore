@@ -2,3 +2,4 @@ app.js
 .travis.yml
 sample/
 .idea
+/StaticDataDefaultRoot/
