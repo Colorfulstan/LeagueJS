@@ -1,4 +1,5 @@
 import {ImageDTO} from './ImageDTO';
+import {ListDTO} from './ListDTO';
 
 export interface SummonerSpellDTO {
 	id: number,
@@ -24,4 +25,11 @@ export interface SummonerSpellDTO {
 	rangeBurn: string,
 	image: ImageDTO,
 	resource: string
+}
+
+/**
+ * keys = spell key
+ */
+export interface SummonerSpellListDTO extends ListDTO<SummonerSpellDTO> {
+
 }

@@ -122,6 +122,7 @@ export interface ChampionFullDTO extends ChampionDTO {
 }
 
 /** keys = key */
-export interface ChampionListDTO extends ListDTO<ChampionDTO> {
+export interface ChampionListDTO<T extends ChampionDTO> extends ListDTO<T> {
 	keys: { [championId: string]: string }
+	format: 'full' | 'standAloneComplex'
 }

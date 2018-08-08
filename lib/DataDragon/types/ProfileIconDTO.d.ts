@@ -1,6 +1,6 @@
 import {ImageDTO} from './ImageDTO';
 
-export interface ProfileIconDTO {
+export interface ProfileIconDataDTO {
 	id: number,
 	image: ImageDTO
 }
