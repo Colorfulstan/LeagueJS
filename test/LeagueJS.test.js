@@ -54,19 +54,14 @@ describe('League of Legends api wrapper test suite', function () {
 		beforeEach(function () {
 			api = new LeagueJs('test');
 		});
-		it('which needs to be set up', function () {
-			expect(api.DataDragonHelper).to.be.undefined;
-			api.setupDataDragonHelper(__dirname);
-			expect(api.DataDragonHelper).to.be.not.undefined;
-		});
 		describe('setupDataDragonHelper', function () {
 			it('throws if no path is provided', function () {
-				expect(()=>{api.setupDataDragonHelper();}).to.throw('No Download Path');
-				expect(()=>{api.setupDataDragonHelper(true);}).to.throw('No Download Path');
+				expect(()=>{api.StaticData.setup();}).to.throw('No Download Path');
+				expect(()=>{api.StaticData.setup(true);}).to.throw('No Download Path');
 			});
 			it('creates the directory path given, if it does not exist', function () {
 				const pathSegments = [__dirname, 'ddhelper', 'test'];
-				api.setupDataDragonHelper(pathSegments, true);
+				api.StaticData.setup(pathSegments, true);
 				const exists = fs.existsSync(path.resolve(...pathSegments));
 				expect(exists).true;
 				fs.rmdirSync(path.resolve(...pathSegments));

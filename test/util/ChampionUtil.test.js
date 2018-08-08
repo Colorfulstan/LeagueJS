@@ -16,7 +16,7 @@ describe('ChampionUtil Testsuite', function () {
 	describe('getChampionKeysFromName()', function () {
 		it('returns the expected key for every champion (depends on StaticData Endpoint!)', function () {
 			const config = TestUtil.getTestConfig();
-			const StaticEndpoint = require('../../lib/endpoints/StaticDataEndpoint');
+			const StaticEndpoint = require('../../lib/compatibility/StaticDataDDragonCompat');
 			const endpoint = new StaticEndpoint(config, TestUtil.createRateLimiter(0,0,false));
 
 			return endpoint.gettingChampions('na1').then(({data}) => {
