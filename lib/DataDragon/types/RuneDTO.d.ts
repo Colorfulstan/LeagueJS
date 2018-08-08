@@ -100,6 +100,7 @@ export interface RuneDTO {
 	maps: { [mapId: string]: boolean }
 }
 
+/** key = id */
 export interface RuneListDTO extends ListDTO<RuneDTO> {
 	basic: RuneDTO
 
