@@ -30,12 +30,12 @@ describe('SummonerEndpoint Testsuite', function () {
 		// Settings -> about -> verification
 		it('requests the verification string', function () {
 			return endpoint.gettingBySummoner(mock_summoner.summonerId, mock_summoner.platformId)
-				.should.eventually.equal('"AP jgl"');
+				.should.eventually.equal('helloworld');
 		});
 	});
     describe('verifying', function () {
         it('verifies the verification Code', function () {
-            return endpoint.verifying("AP jgl", mock_summoner.summonerId, mock_summoner.platformId)
+            return endpoint.verifying("helloworld", mock_summoner.summonerId, mock_summoner.platformId)
                 .should.eventually.be.true;
         });
     });

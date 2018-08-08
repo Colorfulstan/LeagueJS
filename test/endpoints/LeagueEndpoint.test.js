@@ -41,12 +41,6 @@ describe('LeagueEndpoint Testsuite', function () {
 				.equal(mock_rankedSoloQueueConfigId);
 		});
 	});
-	describe('gettingLeagueForSummonerId', function () {
-		it('can request the leagues for a specific summonerId', function () {
-			return endpoint.gettingLeagueForSummonerId(mock_summoner.summonerId, mock_summoner.platformId)
-				.should.eventually.be.an('Array');
-		});
-	});
 
 	describe('gettingLeagueById', function () {
 		it('can request a league for a specific leagueId', function () {
@@ -55,10 +49,4 @@ describe('LeagueEndpoint Testsuite', function () {
 		});
 	});
 
-	describe('gettingPositionsForSummonerId', function () {
-		it('can request the league positions for a specific summonerId', function () {
-			return endpoint.gettingLeagueForSummonerId(mock_summoner.summonerId, mock_summoner.platformId)
-				.should.eventually.be.an('Array');
-		});
-	});
 });
