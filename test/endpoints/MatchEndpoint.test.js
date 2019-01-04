@@ -19,7 +19,6 @@ describe('MatchEndpoint Testsuite', function () {
 	let endpoint;
 	beforeEach(function () {
 		let {per10, per600, allowBursts} = mergedConfig.limits;
-		mergedConfig.useV4 = true;
 		endpoint = new MatchEndpoint(mergedConfig, TestUtil.createRateLimiter(per10, per600, allowBursts));
 	});
 
