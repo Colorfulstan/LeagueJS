@@ -8,17 +8,10 @@ Originated from [ClaudioWilson/LeagueJS](https://github.com/claudiowilson/League
 
 Note: Tournament API is not included at this time
 
-## V4 migration guide
+## 2.0 breaking changes
 
-Generally, you will need to adapt your code, to use encrypted values for summoner-,account- and PUU-ids.
-You can get those by requesting the summoner information from the v4 summoner endpoint (by name).
-
-Noticable changes needed:
-- id values now will be strings instead of numbers
-- you will need to migrate your DB stored values to hold the encrypted values, requested with your API key
-- ids can not shared across multiple projects. Each api key will generate values unique to that API key.
-however, if the API-key is regenerated, the value will be the same. so when using the dev-key or a regenerated key for the same project, 
-you don't need to update the encrypted values
+* v4 endpoints now are mandatory
+* removed deprecated methods
 
 ### step by step
 1) pass migration options to LeagueJS constructor
