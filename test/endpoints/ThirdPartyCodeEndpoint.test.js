@@ -6,8 +6,8 @@ describe('SummonerEndpoint Testsuite', function () {
 	const TestUtil = require('../TestUtil');
 	let mergedConfig = TestUtil.getTestConfig();
 
-	const chai = require("chai");
-	const chaiAsPromised = require("chai-as-promised");
+	const chai = require('chai');
+	const chaiAsPromised = require('chai-as-promised');
 	const should = chai.should;
 	const expect = chai.expect;
 	chai.use(chaiAsPromised);
@@ -19,6 +19,7 @@ describe('SummonerEndpoint Testsuite', function () {
 	let endpoint;
 	beforeEach(function () {
 		let {per10, per600, allowBursts} = mergedConfig.limits;
+		mergedConfig.useV4 = true;
 		endpoint = new ThirdPartyCodeEndpoint(mergedConfig, TestUtil.createRateLimiter(per10, per600, allowBursts));
 	});
 
@@ -29,15 +30,15 @@ describe('SummonerEndpoint Testsuite', function () {
 		// NOTE: add your own summoner here and add the verification code for testing in the client under
 		// Settings -> about -> verification
 		it('requests the verification string', function () {
-			return endpoint.gettingBySummoner(mock_summoner.summonerId, mock_summoner.platformId)
+			return endpoint.gettingBySummoner(mock_summoner.summonerIdV4, mock_summoner.platformId)
 				.should.eventually.equal('helloworld');
 		});
 	});
-    describe('verifying', function () {
-        it('verifies the verification Code', function () {
-            return endpoint.verifying("helloworld", mock_summoner.summonerId, mock_summoner.platformId)
-                .should.eventually.be.true;
-        });
-    });
+	describe('verifying', function () {
+		it('verifies the verification Code', function () {
+			return endpoint.verifying('helloworld', mock_summoner.summonerIdV4, mock_summoner.platformId)
+				.should.eventually.be.true;
+		});
+	});
 
 });

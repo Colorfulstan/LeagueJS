@@ -3,8 +3,8 @@ describe('ChampionEndpoint Testsuite', function () {
 
 	const SpectatorEndpoint = require('../../lib/endpoints/SpectatorEndpoint');
 
-	const chai = require("chai");
-	const chaiAsPromised = require("chai-as-promised");
+	const chai = require('chai');
+	const chaiAsPromised = require('chai-as-promised');
 	const should = chai.should;
 	const expect = chai.expect;
 	chai.use(chaiAsPromised);
@@ -18,6 +18,7 @@ describe('ChampionEndpoint Testsuite', function () {
 	let endpoint;
 	beforeEach(function () {
 		let {per10, per600, allowBursts} = mergedConfig.limits;
+		mergedConfig.useV4 = true;
 		endpoint = new SpectatorEndpoint(mergedConfig, TestUtil.createRateLimiter(per10, per600, allowBursts));
 	});
 

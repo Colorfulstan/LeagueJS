@@ -1,8 +1,19 @@
 {
-  "API_KEY": "",
-  "limits": {
-	"allowBursts": false,
-	"per10": 10,
-	"per600": 500
-  }
+	"API_KEY": "RGAPI-XXX",
+	"summoner": {
+		"name": "Colorfulstan",
+		"summonerId": 19115840,
+		"accountId": 21777671,
+		"summonerIdV4": "encrypted value",
+		"accountIdV4": "encrypted value",
+		"puuid": "encrypted value",
+		"platformId": "euw1",
+		"gameId": 3164960478
+	},
+	"debug": false,
+	"limits": {
+		"allowBursts": false,
+		"per10": 10,
+		"per600": 500
+	}
 }

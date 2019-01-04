@@ -3,8 +3,8 @@ describe('ChampionEndpoint Testsuite', function () {
 
 	const ChampionEndpoint = require('../../lib/endpoints/ChampionEndpoint');
 
-	const chai = require("chai");
-	const chaiAsPromised = require("chai-as-promised");
+	const chai = require('chai');
+	const chaiAsPromised = require('chai-as-promised');
 	// const expect = chai.expect;
 	chai.use(chaiAsPromised);
 	chai.should();
@@ -24,32 +24,15 @@ describe('ChampionEndpoint Testsuite', function () {
 		endpoint.config.limits.retryEndpoints.should.include(endpoint.name);
 	});
 
-	describe('gettingList', function () {
-		it('can request all champions', function () {
-			return endpoint.gettingList(mock_summoner.platformId).then(result => {
-				result.should.have.property('champions');
-				result.champions.should.be.an('Array')
-					.with.length.at.least(136);
-			});
-		});
+	describe('gettingRotations', function () {
+		it('can request the champion rotations', function () {
+			const promise = endpoint.gettingRotations(mock_summoner.platformId)
 
-		it('can request the free champions', function () {
-			return endpoint.gettingList(mock_summoner.platformId, {freeToPlay: true})
-				.should.eventually.have.property('champions')
-				.with.length.of.at.least(10);
-		});
-	});
-	describe('gettingById', function () {
-		it('can request a specific champion', function () {
-			return endpoint.gettingById(TestUtil.mocks.champions.Akali.id, mock_summoner.platformId)
-				.should.eventually.have.property('freeToPlay');
-
-		});
-
-		describe('wrong parameters', function () {
-			it('rejects with TypeError if championId is invalid (not numerical)', function () {
-				return endpoint.gettingById('somestring', mock_summoner.platformId).should.eventually.be.rejectedWith(TypeError);
-			});
+			return Promise.all([
+				promise.should.eventually.have.property('freeChampionIdsForNewPlayers').an('Array'),
+				promise.should.eventually.have.property('freeChampionIds').an('Array'),
+				promise.should.eventually.have.property('maxNewPlayerLevel').a('number')
+			]);
 		});
 	});
 });
