@@ -6,8 +6,8 @@ describe('SummonerEndpoint Testsuite', function () {
 	const TestUtil = require('../TestUtil');
 	let mergedConfig = TestUtil.getTestConfig();
 
-	const chai = require("chai");
-	const chaiAsPromised = require("chai-as-promised");
+	const chai = require('chai');
+	const chaiAsPromised = require('chai-as-promised');
 	const should = chai.should;
 	const expect = chai.expect;
 	chai.use(chaiAsPromised);
@@ -19,6 +19,7 @@ describe('SummonerEndpoint Testsuite', function () {
 	let endpoint;
 	beforeEach(function () {
 		let {per10, per600, allowBursts} = mergedConfig.limits;
+		mergedConfig.useV4 = true;
 		endpoint = new SummonerEndpoint(mergedConfig, TestUtil.createRateLimiter(per10, per600, allowBursts));
 	});
 
@@ -39,22 +40,28 @@ describe('SummonerEndpoint Testsuite', function () {
 
 
 	it('can request a summoner by accountId', function () {
-		return endpoint.gettingByAccount(mock_summoner.accountId, mock_summoner.platformId)
+		return endpoint.gettingByAccount(mock_summoner.accountIdV4, mock_summoner.platformId)
 			.should.eventually.have.property('accountId');
 	});
 
 	describe('gettingById', function () {
 		it('works with summonerId', function () {
-			return endpoint.gettingById(mock_summoner.summonerId, mock_summoner.platformId)
+			return endpoint.gettingById(mock_summoner.summonerIdV4, mock_summoner.platformId)
 				.should.eventually.have.property('accountId');
 		});
 
-		it('works with accountId', function () {
-			return endpoint.gettingById(mock_summoner.accountId, mock_summoner.platformId)
-				.should.eventually.have.property('accountId');
+		it('no longer works with accountId in v4', function () {
+			return endpoint.gettingById(mock_summoner.accountIdV4, mock_summoner.platformId)
+				.should.eventually.be.rejectedWith('Bad Request - Expected message of type summonerId, but found accountId');
 		});
 	});
 
+	describe('gettingByPUUID', function () {
+		it('works with puuid', function () {
+			return endpoint.gettingByPUUID(mock_summoner.puuid, mock_summoner.platformId)
+				.should.eventually.have.property('accountId');
+		});
+	});
 
 	// Note: tests within this sub-suite are not independent
 	describe('it can use request-caching if enabled', function () { // TODO: better test-design and move to Endpoint tests
@@ -70,12 +77,12 @@ describe('SummonerEndpoint Testsuite', function () {
 		});
 
 		it('fils and uses the cache on same requests', function () {
-			return cachedEnpoint.gettingById(mock_summoner.summonerId, mock_summoner.platformId).then(() => {
+			return cachedEnpoint.gettingById(mock_summoner.summonerIdV4, mock_summoner.platformId).then(() => {
 				expect(cachedEnpoint.cache.getStats(), 'no keys were cached')
 					.to.have.property('keys')
 					.equal(1);
 
-				return cachedEnpoint.gettingById(mock_summoner.summonerId, mock_summoner.platformId).then(() => {
+				return cachedEnpoint.gettingById(mock_summoner.summonerIdV4, mock_summoner.platformId).then(() => {
 					return expect(cachedEnpoint.cache.getStats(), 'no keys were hit')
 						.to.have.property('hits')
 						.equal(1);
@@ -85,21 +92,21 @@ describe('SummonerEndpoint Testsuite', function () {
 
 		it('repeated (same) requests should take no time (using cached request)', function () {
 			const time1 = new Date().getTime();
-			 return cachedEnpoint.gettingById(mock_summoner.summonerId, mock_summoner.platformId).then(() => {
+			return cachedEnpoint.gettingById(mock_summoner.summonerIdV4, mock_summoner.platformId).then(() => {
 				const time2 = new Date().getTime();
-				 return cachedEnpoint.gettingById(mock_summoner.summonerId, mock_summoner.platformId).then(() => {
+				return cachedEnpoint.gettingById(mock_summoner.summonerIdV4, mock_summoner.platformId).then(() => {
 					const time3 = new Date().getTime();
 
-					const delta1 = time2-time1;
-					const delta2 = time3-time2;
-					 delta1.should.be.at.least(100);
-					 delta2.should.be.at.most(10);
+					const delta1 = time2 - time1;
+					const delta2 = time3 - time2;
+					delta1.should.be.at.least(100);
+					delta2.should.be.at.most(10);
 				});
 			});
 		});
 		it('repeated (same) requests should yield the same results', function () {
-			return cachedEnpoint.gettingById(mock_summoner.summonerId, mock_summoner.platformId).then((response1) => {
-				return cachedEnpoint.gettingById(mock_summoner.summonerId, mock_summoner.platformId).then((response2) => {
+			return cachedEnpoint.gettingById(mock_summoner.summonerIdV4, mock_summoner.platformId).then((response1) => {
+				return cachedEnpoint.gettingById(mock_summoner.summonerIdV4, mock_summoner.platformId).then((response2) => {
 					return expect(response1).to.deep.equal(response2);
 				});
 			});
