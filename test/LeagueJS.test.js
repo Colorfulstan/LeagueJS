@@ -13,8 +13,9 @@ describe('League of Legends api wrapper test suite', function () {
 	chai.should();
 
 	it('should apply the config to the Class', function () {
-		let api = new LeagueJs('test');
+		let api = new LeagueJs('test', {useV4: true, apiVersionOverrides: {}});
 
+		api.config.apiVersionOverrides.should.deep.equal({});
 		api.config.should.have.property('API_KEY');
 		api.config.API_KEY.should.be.equal('test');
 	});
@@ -56,8 +57,12 @@ describe('League of Legends api wrapper test suite', function () {
 		});
 		describe('setupDataDragonHelper', function () {
 			it('throws if no path is provided', function () {
-				expect(()=>{api.StaticData.setup();}).to.throw('No Download Path');
-				expect(()=>{api.StaticData.setup(true);}).to.throw('No Download Path');
+				expect(() => {
+					api.StaticData.setup();
+				}).to.throw('No Download Path');
+				expect(() => {
+					api.StaticData.setup(true);
+				}).to.throw('No Download Path');
 			});
 			it('creates the directory path given, if it does not exist', function () {
 				const pathSegments = [__dirname, 'ddhelper', 'test'];
@@ -65,7 +70,7 @@ describe('League of Legends api wrapper test suite', function () {
 				const exists = fs.existsSync(path.resolve(...pathSegments));
 				expect(exists).true;
 				fs.rmdirSync(path.resolve(...pathSegments));
-				fs.rmdirSync(path.resolve(...pathSegments.slice(0,pathSegments.length - 1)));
+				fs.rmdirSync(path.resolve(...pathSegments.slice(0, pathSegments.length - 1)));
 			});
 		});
 	});

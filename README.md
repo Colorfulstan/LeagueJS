@@ -8,6 +8,44 @@ Originated from [ClaudioWilson/LeagueJS](https://github.com/claudiowilson/League
 
 Note: Tournament API is not included at this time
 
+## V4 migration guide
+
+Generally, you will need to adapt your code, to use encrypted values for summoner-,account- and PUU-ids.
+You can get those by requesting the summoner information from the v4 summoner endpoint (by name).
+
+Noticable changes needed:
+- id values now will be strings instead of numbers
+- you will need to migrate your DB stored values to hold the encrypted values, requested with your API key
+- ids can not shared across multiple projects. Each api key will generate values unique to that API key.
+however, if the API-key is regenerated, the value will be the same. so when using the dev-key or a regenerated key for the same project, 
+you don't need to update the encrypted values
+
+### step by step
+1) pass migration options to LeagueJS constructor
+```
+const leagueJs = new LeagueJS(process.env.LEAGUE_API_KEY, {
+		useV4: true, // enables apiVersion overrides
+		// these values override default values in Config.js
+		// values omitted will use defaults from Config.js!
+		apiVersionOverrides: {
+			'Champion': 'v3',
+			'ChampionMastery': 'v3',
+			'League': 'v3',
+			'LolStatus': 'v3',
+			'Match': 'v3',
+			'Spectator': 'v3',
+			'Summoner': 'v3',
+			'ThirdPartyCode': 'v3',
+			// 'TournamentStub': 'v3',
+			// 'Tournament': 'v3'
+		}
+	} )
+```
+
+2) change the apiVersion of the endpoint you're working on to 'v4' and do all your migration work / testing
+3) repeat for all endpoints you use
+4) remove migration options when done with migration, and update LeagueJS to 2.x
+
 ## Table of Content
 - [Quickstart](#quickstart)
 - [Library Structure](#library-structure)
@@ -30,8 +68,8 @@ npm install leaguejs --save
 // setting default platformId to be used if you don't specify it on the endpoint method
 process.env.LEAGUE_API_PLATFORM_ID = 'euw1'
 
-const LeagueJs = require('../lib/LeagueJS.js');
-const leagueJs = new LeagueJs(process.env.LEAGUE_API_KEY);
+const LeagueJS = require('../lib/LeagueJS.js');
+const leagueJs = new LeagueJS(process.env.LEAGUE_API_KEY);
 
 leagueJs.Summoner
 	.gettingByName('EldoranDev')
@@ -91,7 +129,7 @@ for additional usage info.
 By default, DataDragonHelper will store DDragonFiles within it's own module-directory.
 To prevent this you can either set the appropriate path during instantiation
 ```
-const leagueJs = LeagueJs(process.env.LEAGUE_API_KEY, {STATIC_DATA_ROOT: ...});
+const leagueJs = LeagueJS(process.env.LEAGUE_API_KEY, {STATIC_DATA_ROOT: ...});
 ```
 
 or use the setup method within StaticData
@@ -144,7 +182,7 @@ const leagueJs = require('../lib/LeagueJS.js');
 
 // passing in allowBursts: true on instantiation
 
-const api = new LeagueJs(process.env.LEAGUE_API_KEY, {
+const api = new LeagueJS(process.env.LEAGUE_API_KEY, {
 	limits: {allowBurst: true}
 });
 
@@ -165,8 +203,8 @@ will be 1000, 2000, 4000 MS for the first 3 retries respectively.
 
 You can configure this behaviour by passing the relevant options into the LeagueJS constructor on instantiation:
 ```
-const LeagueJs = require('../lib/LeagueJS.js');
-const api = new LeagueJs(process.env.LEAGUE_API_KEY, {
+const LeagueJS = require('../lib/LeagueJS.js');
+const api = new LeagueJS(process.env.LEAGUE_API_KEY, {
 	limits: {
 		'allowBursts': false,
 
