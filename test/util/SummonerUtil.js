@@ -3,7 +3,7 @@ describe('SummonerUtil test suite', function () {
 
 	const SummonerUtil = require('../../lib/util/SummonerUtil');
 
-	const chai = require("chai");
+	const chai = require('chai');
 	const should = chai.should;
 	const expect = chai.expect;
 	chai.should();
@@ -22,30 +22,35 @@ describe('SummonerUtil test suite', function () {
 			expect(SummonerUtil.validateSummonerNameInputCharacters(VALID_CHARS_NA_OCE)).to.be.null;
 		});
 		it('should return null for valid characters in EUW', function () {
-			expect(SummonerUtil.validateSummonerNameInputCharacters(VALID_CHARS_EUW)).to.be.null
+			expect(SummonerUtil.validateSummonerNameInputCharacters(VALID_CHARS_EUW)).to.be.null;
 		});
 		it('should return null for valid characters in EUNE', function () {
-			expect(SummonerUtil.validateSummonerNameInputCharacters(VALID_CHARS_EUNE)).to.be.null
+			expect(SummonerUtil.validateSummonerNameInputCharacters(VALID_CHARS_EUNE)).to.be.null;
 		});
 		it('should return null for valid characters in Brazil', function () {
-			expect(SummonerUtil.validateSummonerNameInputCharacters(VALID_CHARS_BR)).to.be.null
+			expect(SummonerUtil.validateSummonerNameInputCharacters(VALID_CHARS_BR)).to.be.null;
 		});
 		it('should return null for valid characters in Russia', function () {
-			expect(SummonerUtil.validateSummonerNameInputCharacters(VALID_CHARS_RU)).to.be.null
+			expect(SummonerUtil.validateSummonerNameInputCharacters(VALID_CHARS_RU)).to.be.null;
 		});
 		it('should return null for valid characters in Turkey', function () {
-			expect(SummonerUtil.validateSummonerNameInputCharacters(VALID_CHARS_TR)).to.be.null
+			expect(SummonerUtil.validateSummonerNameInputCharacters(VALID_CHARS_TR)).to.be.null;
 		});
 		it('should return null for valid characters in LATAM', function () {
-			expect(SummonerUtil.validateSummonerNameInputCharacters(VALID_CHARS_LAN_LAS)).to.be.null
+			expect(SummonerUtil.validateSummonerNameInputCharacters(VALID_CHARS_LAN_LAS)).to.be.null;
 		});
 		it('should return the invalid character if present', function () {
-			const invalidCharacters = "|-!§$%&/\\()=?^°";
-			const actual = SummonerUtil.validateSummonerNameInputCharacters(invalidCharacters)
+			const invalidCharacters = '|-!§$%&/\\()=?^°';
+			const actual = SummonerUtil.validateSummonerNameInputCharacters(invalidCharacters);
 			expect(actual).an('Array').length(invalidCharacters.length);
-			actual.forEach((char,index) => {
+			actual.forEach((char, index) => {
 				expect(char).equals(invalidCharacters[index]);
-			})
+			});
+		});
+		it('works with fullwidth characters (asian)', function () {
+			const validName = 'ＣＳ命';
+			const actual = SummonerUtil.validateSummonerNameInputCharacters(validName);
+			expect(actual).to.be.null;
 		});
 	});
 });
