@@ -13,32 +13,6 @@ Note: Tournament API is not included at this time
 * v4 endpoints now are mandatory
 * removed deprecated methods
 
-### step by step
-1) pass migration options to LeagueJS constructor
-```
-const leagueJs = new LeagueJS(process.env.LEAGUE_API_KEY, {
-		useV4: true, // enables apiVersion overrides
-		// these values override default values in Config.js
-		// values omitted will use defaults from Config.js!
-		apiVersionOverrides: {
-			'Champion': 'v3',
-			'ChampionMastery': 'v3',
-			'League': 'v3',
-			'LolStatus': 'v3',
-			'Match': 'v3',
-			'Spectator': 'v3',
-			'Summoner': 'v3',
-			'ThirdPartyCode': 'v3',
-			// 'TournamentStub': 'v3',
-			// 'Tournament': 'v3'
-		}
-	} )
-```
-
-2) change the apiVersion of the endpoint you're working on to 'v4' and do all your migration work / testing
-3) repeat for all endpoints you use
-4) remove migration options when done with migration, and update LeagueJS to 2.x
-
 ## Table of Content
 - [Quickstart](#quickstart)
 - [Library Structure](#library-structure)

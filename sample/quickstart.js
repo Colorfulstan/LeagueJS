@@ -1,11 +1,13 @@
 // setting default platformId to be used if you don't specify it on the endpoint method
-process.env.LEAGUE_API_PLATFORM_ID = 'euw1'
+const testConfig = require('../test/testConfig');
+process.env.LEAGUE_API_PLATFORM_ID = testConfig.summoner.platformId;
 
 const LeagueJs = require('../lib/LeagueJS.js');
-const api = new LeagueJs(process.env.LEAGUE_API_KEY);
+const api = new LeagueJs(testConfig.API_KEY);
+
 
 api.Summoner
-	.gettingByName('EldoranDev')
+	.gettingByName(testConfig.summoner.name)
 	.then(data => {
 		'use strict';
 		console.log(data);
@@ -16,7 +18,7 @@ api.Summoner
 	});
 
 api.Summoner
-	.gettingByAccount(22177292, 'euw')
+	.gettingByAccount(testConfig.summoner.accountIdV4, 'euw')
 	.then(data => {
 		'use strict';
 		console.log(data);
