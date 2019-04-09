@@ -12,7 +12,9 @@
 		"PRESEASON2017": 8,
 		"SEASON2017": 9,
 		"PRESEASON2018": 10,
-		"SEASON2018": 11
+		"SEASON2018": 11,
+		"PRESEASON2019": 12,
+		"SEASON2019": 13
 	},
 	"matchMakingQueues": {
 		"CUSTOM": {
