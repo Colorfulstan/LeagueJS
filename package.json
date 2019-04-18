@@ -1,5 +1,5 @@
 {
-  "name": "leaguejs",
+	  "name": "leaguejs",
   "version": "2.0.1",
   "description": "Wrapper for the League of Legends API",
   "keywords": [
@@ -8,7 +8,7 @@
     "wrapper",
     "client",
     "nodejs",
-    "riot-games-api-v3"
+    "riot-games-api-v4"
   ],
   "author": {
     "name": "Jonas Krispin",
