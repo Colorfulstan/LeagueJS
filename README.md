@@ -31,7 +31,7 @@ Note: Tournament API is not included at this time
 npm install leaguejs --save
 ```
 
-```
+```js
 // setting default platformId to be used if you don't specify it on the endpoint method
 process.env.LEAGUE_API_PLATFORM_ID = 'euw1'
 
@@ -70,7 +70,7 @@ Methods returning a promise are named in present progressive (gettingXY) while s
 
 #### Endpoints
 Each Endpoint is located in it's own class, accessible by its name on the leagueJs object.
-```
+```js
 leagueJs.Champion
 leagueJs.ChampionMastery
 leagueJs.League
@@ -95,13 +95,13 @@ for additional usage info.
 
 By default, DataDragonHelper will store DDragonFiles within it's own module-directory.
 To prevent this you can either set the appropriate path during instantiation
-```
+```js
 const leagueJs = LeagueJS(process.env.LEAGUE_API_KEY, {STATIC_DATA_ROOT: ...});
 ```
 
 or use the setup method within StaticData
 
-```
+```js
 // DataDragonHelper will use the provided path to store the downloaded files
 // you have multiple possibilities to set the path
 
@@ -116,7 +116,7 @@ leagueJs.StaticData.setup('absolute/path/for/files', true)
 
 #### Utility methods
 Utility methods are located within ```/lib/util``` separated into thematic groups. They can be accessed in 2 ways:
-```
+```js
 const LeagueJSUtil = api.util
 const Util = require('leaguejs/lib/util')
 ```
@@ -128,7 +128,7 @@ All Utility methods are implemented as static and pure functions
 *LEAGUE_API_PLATFORM_ID* The value of this environmental variable will be used as default platformId. If not provided, 'na1' is used.
 
 Alternatively they can be provided to the League constructor within the options parameter
-```
+```js
 const leagueJs = new League(<Your Api key>, {PLATFORM_ID: <default api region>})
 ```
 
@@ -144,7 +144,7 @@ Code created with LeagueJS < 1.5.0 should not be affected other then that the de
 (see [RiotRateLimiter-node docs](https://github.com/Colorfulstan/RiotRateLimiter-node#choosing-the-right-strategy) for details.), which means your code might execute slower then before.
 
 You can change the limiting strategy in two ways:
-```
+```js
 const leagueJs = require('../lib/LeagueJS.js');
 
 // passing in allowBursts: true on instantiation
@@ -169,7 +169,7 @@ All subsequent retries will be done with a timeout of 2* the previous one (so wi
 will be 1000, 2000, 4000 MS for the first 3 retries respectively.
 
 You can configure this behaviour by passing the relevant options into the LeagueJS constructor on instantiation:
-```
+```js
 const LeagueJS = require('../lib/LeagueJS.js');
 const api = new LeagueJS(process.env.LEAGUE_API_KEY, {
 	limits: {
@@ -199,7 +199,7 @@ By default, caching is disabled.
 If enabled, the default caching is using node-cache with the request-urls as caching-key
 The easiest way to setup caching is to pass a minimum set of caching options to LeagueJS on instantiation
 
-```
+```js
 const leagueJs = new LeagueJS({
 	...
 	caching: {
@@ -211,7 +211,7 @@ const leagueJs = new LeagueJS({
 ```
 
 You can setup caching globally or on an Endpoint basis
-```
+```js
 // replacing Cache-options within Summoner endpoint (overwrites global options for that Endpoint)
 leagueJs.Summoner.setCache({ stdTTL: 120})
 
@@ -226,7 +226,7 @@ leagueJs.disableCaching();
 ```
 
 Options not explicitly set use following defaults (found in ```/lib/Config.js```)
-```
+```js
 {
 	/** the standard ttl as number in seconds for every generated cache element.
 	 * (default: 0)
@@ -261,7 +261,7 @@ Options not explicitly set use following defaults (found in ```/lib/Config.js```
 You can set your own Caching implementation if you like
 **NOTE: make sure the public interface of your caching implementation is the same as node-cache uses to prevent incompatibilities.**
 
-```
+```js
 const MyCache = require('myCache')
 
 // replacing Cache during instantiation (for all endpoints)
