@@ -65,5 +65,25 @@ describe('RegionAndPlatformUtil test suite', function () {
 			RegionAndPlatformUtil.getPlatformIdFromPlatformIdOrRegion('na1').should.equal('na1');
 		});
 	});
+	describe('getContinentRegionFromPlatformIdOrRegion()', function () {
+		it('throws on invalid platformId values', function () {
+			expect(()=>{RegionAndPlatformUtil.getContinentRegionFromPlatformIdOrRegion('en1');}).to.throw();
+		});
+		it('throws on invalid region values', function () {
+			expect(()=>{RegionAndPlatformUtil.getContinentRegionFromPlatformIdOrRegion('EN');}).to.throw();
+		});
+		it('works case insensitive', function () {
+			RegionAndPlatformUtil.getContinentRegionFromPlatformIdOrRegion('NA').should.equal('americas');
+			RegionAndPlatformUtil.getContinentRegionFromPlatformIdOrRegion('na').should.equal('americas');
+			RegionAndPlatformUtil.getContinentRegionFromPlatformIdOrRegion('NA1').should.equal('americas');
+			RegionAndPlatformUtil.getContinentRegionFromPlatformIdOrRegion('na1').should.equal('americas');
+		});
+		it('gives the right region (continent)', function () {
+			RegionAndPlatformUtil.getContinentRegionFromPlatformIdOrRegion('NA').should.equal('americas');
+			RegionAndPlatformUtil.getContinentRegionFromPlatformIdOrRegion('euw').should.equal('europe');
+			RegionAndPlatformUtil.getContinentRegionFromPlatformIdOrRegion('ru').should.equal('europe');
+			RegionAndPlatformUtil.getContinentRegionFromPlatformIdOrRegion('br1').should.equal('americas');
+		});
+	});
 
 });

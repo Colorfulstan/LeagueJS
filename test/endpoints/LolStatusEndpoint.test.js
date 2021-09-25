@@ -22,7 +22,10 @@ describe('ChampionEndpoint Testsuite', function () {
 	it('has its name added to default retryEndpoints', function () {
 		endpoint.config.limits.retryEndpoints.should.include(endpoint.name);
 	});
+	it('status endpoint is deprecated', function () {
+		return endpoint.gettingShardData('na1').should.be.rejected;
+	});
 	it('gets the status of the shard specified by the platformId', function () {
-		return endpoint.gettingShardData('na1').should.eventually.have.property('slug').equal('na');
+		return endpoint.gettingPlattformData('na1').should.eventually.have.property('slug').equal('na');
 	});
 });
