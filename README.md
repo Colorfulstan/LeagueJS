@@ -71,6 +71,7 @@ Methods returning a promise are named in present progressive (gettingXY) while s
 #### Endpoints
 Each Endpoint is located in it's own class, accessible by its name on the leagueJs object.
 ```js
+leagueJs.Challenges
 leagueJs.Champion
 leagueJs.ChampionMastery
 leagueJs.League
