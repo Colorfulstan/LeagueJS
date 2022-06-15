@@ -1,8 +1,6 @@
 LeagueJS
 ========
 
-[![Join the chat at https://gitter.im/League-JS/Lobby](https://badges.gitter.im/League-JS/Lobby.svg)](https://gitter.im/League-JS/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 A Javascript Wrapper for the League of Legends API.
 Originated from [ClaudioWilson/LeagueJS](https://github.com/claudiowilson/LeagueJS) but after a complete rework now published under leaguejs and using RIOT API V3
 
