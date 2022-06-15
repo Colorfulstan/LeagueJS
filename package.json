@@ -1,6 +1,6 @@
 {
   "name": "leaguejs",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "description": "Wrapper for the League of Legends API",
   "keywords": [
     "leagueoflegends",
