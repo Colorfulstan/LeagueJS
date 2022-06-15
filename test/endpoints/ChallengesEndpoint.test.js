@@ -11,6 +11,7 @@ describe('ChallengesEndpoint Testsuite', function () {
 
 	const TestUtil = require('../TestUtil');
 	let mergedConfig = TestUtil.getTestConfig();
+	console.log(mergedConfig)
 
 	const mock_summoner = TestUtil.mocks.summoners.Colorfulstan;
 
@@ -32,7 +33,7 @@ describe('ChallengesEndpoint Testsuite', function () {
 				promise.should.eventually.be.an('Array'),
 				promise.should.eventually.have.lengthOf(200),
 				promise.then((data) => {
-					d = data[0];
+					const d = data[0];
 					return Promise.all([
 						d.should.have.property('position').a('number'),
 						d.should.have.property('puuid').a('string'),
@@ -61,18 +62,18 @@ describe('ChallengesEndpoint Testsuite', function () {
 
 		it('fails when challengeId is invalid', () => {
 			const invalidChallengeId = "Invalid";
-			return endpoint.gettingLeaderboardsByLevelForChallenge(invalidLevel, invalidChallengeId)
-				.should.eventually.be.rejectedWith(`${challengeId} has to be a number or numerical string. Received: ${invalidChallengeId}`);
+			return endpoint.gettingLeaderboardsByLevelForChallenge("CHALLENGER", invalidChallengeId)
+				.should.eventually.be.rejectedWith(`challengeId has to be a number or numerical string. Received: ${invalidChallengeId}`);
 		});
 	});
 
 	describe('gettingChallengesConfig', () => {
 		it('returns the config for all challenges', () => {
-			const promise =  endpoint.gettingChallengesConfig();
+			const promise = endpoint.gettingChallengesConfig();
 			
 			return Promise.all([
 				promise.should.eventually.be.an('Array'),
-				promise.should.eventually.not.be.empty()
+				promise.should.eventually.not.be.empty
 			]);
 		});
 	});
@@ -119,7 +120,7 @@ describe('ChallengesEndpoint Testsuite', function () {
 
 	describe('gettingChallengesPlayerData', () => {
 		it('returns challenge statistics for a specific player', () => {
-			const promise = endpoint.gettingChallengePercentilesById(mock_summoner.challengeId);
+			const promise = endpoint.gettingChallengesPlayerData(mock_summoner.puuid);
 
 			return Promise.all([
 				promise.should.eventually.have.property('totalPoints').an('object'),
