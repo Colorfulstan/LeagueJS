@@ -27,3 +27,15 @@ api.Summoner
 		'use strict';
 		console.log(err);
 	});
+
+api.Challenges
+	.gettingChallengesConfig()
+	.then(data => {
+		'use strict';
+		console.log(data);
+	})
+	.catch(err => {
+		'use strict';
+		console.log(err);
+	});
+
