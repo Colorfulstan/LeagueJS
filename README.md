@@ -1,6 +1,8 @@
 LeagueJS
 ========
 
+## This Repository is currently not actively maintained (september 2024)
+
 A Javascript Wrapper for the League of Legends API.
 Originated from [ClaudioWilson/LeagueJS](https://github.com/claudiowilson/LeagueJS) but after a complete rework now published under leaguejs and using RIOT API V3
 
